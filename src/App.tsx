@@ -3,7 +3,7 @@ import './App.css';
 import { Container } from './components/Container/Container';
 import JobList from './components/JobList/JobList';
 import { getJobs } from './services/api';
-import {IJob} from "./services/types"
+import { IJob } from './services/types';
 
 function App(): React.ReactElement {
    const [jobs, setJobs] = useState<IJob[]>([]);
@@ -11,7 +11,7 @@ function App(): React.ReactElement {
    const getAllJobs = async () => {
       try {
          const response = await getJobs();
-         const fetchedJobs = response.data
+         const fetchedJobs = response.data;
          setJobs(fetchedJobs ? fetchedJobs : []);
       } catch (error) {
          console.log(error);
@@ -19,16 +19,16 @@ function App(): React.ReactElement {
    };
 
    useEffect(() => {
-      getAllJobs()
+      getAllJobs();
    }, []);
 
    return (
       <Container>
          <h1>JoBoard 🛹</h1>
          <JobList>
-            {jobs.map(({_id, title}) => 
-            <p key={_id}>{title}</p>
-            )}
+            {jobs.map(({ _id, title }) => (
+               <p key={_id}>{title}</p>
+            ))}
          </JobList>
       </Container>
    );

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export interface IJob {
    city: string;
@@ -21,8 +21,8 @@ export interface IJob {
    _id: string;
 }
 
-export type IJobs = IJob[]
+export type IJobs = IJob[];
 
 export type PropsWithChildren = {
-    children: ReactNode;
-  };
+   children: ReactNode;
+};

@@ -1,12 +1,8 @@
-import React from 'react'
-import { PropsWithChildren } from '../../services/types'
+import React from 'react';
+import { PropsWithChildren } from '../../services/types';
 
-const JobList:React.FC<PropsWithChildren> = ({children}) => {
-  return (
-    <section>
-        {children}
-    </section>
-  )
-}
+const JobList: React.FC<PropsWithChildren> = ({ children }) => {
+   return <section>{children}</section>;
+};
 
-export default JobList
+export default JobList;

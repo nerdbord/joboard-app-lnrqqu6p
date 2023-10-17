@@ -1,0 +1,81 @@
+.container {
+   width: 392px;
+   max-width: 392px;
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   flex-direction: column;
+   gap: 2px;
+}
+
+.searchFieldContainer {
+   width: 100%;
+   height: 50px;
+   box-shadow: 0px 0px 4px 0px rgba(149, 100, 212, 0.4);
+   padding: 6.25px 10px 6.25px 24px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   color: #545454;
+   background-color: #ffffff;
+   border-radius: 5px;
+}
+
+input {
+   height: 35.5px;
+   width: 287px;
+   color: #545454;
+   background-color: #ffffff;
+   font-size: 14px;
+   line-height: 14px;
+   font-weight: 500;
+   border: none;
+
+   &::placeholder {
+      opacity: 1;
+   }
+}
+
+.icon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+// Autocomplete dropdown
+.dropdown {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   flex-direction: column;
+}
+
+.dropdownItem {
+   width: 100%;
+   height: 38px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   border: 1px solid #dadada;
+   padding: 4px 15px;
+   color: #545454;
+   background-color: #ffffff;
+   cursor: pointer;
+
+   p {
+      font-size: 14px;
+      font-weight: 500;
+
+      span {
+         font-weight: 700;
+      }
+   }
+
+   p:last-child {
+      font-size: 12px;
+      font-weight: 400;
+   }
+}

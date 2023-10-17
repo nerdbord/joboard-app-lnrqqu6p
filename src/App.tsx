@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Container } from './components/Container/Container';
 import JobList from './components/JobList/JobList';
 import { getJobs } from './services/api';
-import { IJob } from './services/types';
+import useJobsStore from './store/useJobsStore';
+import SearchSection from './components/search/SearchSection';
 
 function App(): React.ReactElement {
-   const [jobs, setJobs] = useState<IJob[]>([]);
+   const { setJobs, filteredJobs } = useJobsStore();
 
-   const getAllJobs = async () => {
+   useEffect(() => {
+      getAllJobs();
+   }, []);
+
+   const getAllJobs = async (): Promise<void> => {
       try {
          const response = await getJobs();
          const fetchedJobs = response.data;
@@ -18,15 +23,13 @@ function App(): React.ReactElement {
       }
    };
 
-   useEffect(() => {
-      getAllJobs();
-   }, []);
-
    return (
       <Container>
          <h1>JoBoard 🛹</h1>
+         <SearchSection />
+
          <JobList>
-            {jobs.map(({ _id, title }) => (
+            {filteredJobs.map(({ _id, title }) => (
                <p key={_id}>{title}</p>
             ))}
          </JobList>

@@ -8,6 +8,7 @@ interface JobsStore {
    searchLocation: string;
 
    setJobs: (value: IJobs) => void;
+   clearSearch: () => void;
    setSearchTitle: (value: string) => void;
    setSearchLocation: (value: string) => void;
 }
@@ -19,6 +20,8 @@ const useJobsStore = create<JobsStore>((set) => ({
    searchLocation: '',
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
+   clearSearch: () =>
+      set((state) => ({ filteredJobs: state.jobs, searchTitle: '', searchLocation: '' })),
    setSearchTitle: (value) => {
       set({ searchTitle: value });
       setFilteredJobs(set);

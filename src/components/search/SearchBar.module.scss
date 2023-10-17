@@ -1,11 +1,7 @@
 .container {
    width: 392px;
    max-width: 392px;
-   display: flex;
-   align-items: center;
-   justify-content: start;
-   flex-direction: column;
-   gap: 2px;
+   position: relative;
 }
 
 .searchFieldContainer {
@@ -50,6 +46,8 @@ input {
    align-items: center;
    justify-content: start;
    flex-direction: column;
+   position: absolute;
+   margin-top: 2px;
 }
 
 .dropdownItem {

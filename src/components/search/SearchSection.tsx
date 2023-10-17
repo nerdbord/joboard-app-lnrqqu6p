@@ -4,7 +4,15 @@ import SearchBar from './SearchBar';
 import styles from './SearchSection.module.scss';
 
 function SearchSection(): React.ReactElement {
-   const { jobs, searchTitle, setSearchTitle, searchLocation, setSearchLocation } = useJobsStore();
+   const {
+      jobs,
+      filteredJobs,
+      searchTitle,
+      setSearchTitle,
+      searchLocation,
+      setSearchLocation,
+      clearSearch,
+   } = useJobsStore();
    return (
       <section className={styles.container}>
          <SearchBar
@@ -19,6 +27,13 @@ function SearchSection(): React.ReactElement {
             searchValue={searchLocation}
             setSearchValue={setSearchLocation}
          /> */}
+         <div className={styles.information}>
+            <p>
+               {filteredJobs.length} offer{filteredJobs.length > 1 && 's'} found
+               {searchTitle && ` for "${searchTitle}"`}
+            </p>
+            <span onClick={clearSearch}>Clear search</span>
+         </div>
       </section>
    );
 }

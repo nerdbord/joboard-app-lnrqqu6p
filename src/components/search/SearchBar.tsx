@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { IJobs } from '../../services/types';
 import styles from './SearchBar.module.scss';
 import LoupeIcon from '../icons/LoupeIcon';
@@ -6,6 +6,7 @@ import LocationIcon from '../icons/LocationIcon';
 
 interface Props {
    jobs: IJobs;
+   zIndex: number;
    searchFor: 'title' | 'city';
    searchValue: string;
    setSearchValue: (searchValue: string) => void;
@@ -13,13 +14,12 @@ interface Props {
 
 export const SearchByJobTitle: React.FC<Props> = ({
    jobs,
+   zIndex,
    searchFor,
    searchValue,
    setSearchValue,
 }) => {
-   const handleInputChange = (value: string) => {
-      setSearchValue(value);
-   };
+   const [inputFocused, setInputFocused] = useState(false);
 
    const highlightMatch = (suggestion: string) => {
       const searchVal = searchValue.toLocaleLowerCase();
@@ -40,16 +40,21 @@ export const SearchByJobTitle: React.FC<Props> = ({
          return suggestion;
       }
    };
+   const handleBlurInput = () => {
+      setTimeout(() => {
+         setInputFocused(false);
+      }, 100);
+   };
    return (
-      <div className={styles.container}>
+      <div className={styles.container} style={{ zIndex: zIndex }}>
          <div className={styles.searchFieldContainer}>
             <input
                className={styles.searchInput}
                type="text"
                value={searchValue}
-               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e.target.value)
-               }
+               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
+               onFocus={() => setInputFocused(true)}
+               onBlur={handleBlurInput}
                placeholder={searchFor === 'title' ? 'Search for' : 'Search location'}
             />
             <div className={styles.icon}>
@@ -58,31 +63,32 @@ export const SearchByJobTitle: React.FC<Props> = ({
          </div>
 
          {/* Autocomplete items */}
-         <div className={styles.dropdown}>
-            {jobs
-               .filter((item, idx, self) => {
-                  const suggestion = item[searchFor].toLocaleLowerCase();
-                  const searchVal = searchValue.toLocaleLowerCase();
-                  return (
-                     searchVal &&
-                     suggestion !== searchVal &&
-                     suggestion.includes(searchVal) &&
-                     (searchFor !== 'city' ||
-                        !self.slice(0, idx).some((el) => el.city === item.city))
-                  );
-               })
-               .slice(0, 4)
-               .map((job) => (
-                  <div
-                     key={job._id}
-                     className={styles.dropdownItem}
-                     onClick={() => handleInputChange(job[searchFor])}
-                  >
-                     {highlightMatch(job[searchFor])}
-                     {searchFor === 'title' && <p>{job.companyName}</p>}
-                  </div>
-               ))}
-         </div>
+         {inputFocused && searchValue && (
+            <div className={styles.dropdown}>
+               {jobs
+                  .filter((item, idx, self) => {
+                     const suggestion = item[searchFor].toLocaleLowerCase();
+                     const searchVal = searchValue.toLocaleLowerCase();
+                     return (
+                        suggestion !== searchVal && //hide when searchValue is equal to autocomplete suggestion
+                        suggestion.includes(searchVal) &&
+                        (searchFor !== 'city' || //Ommit city autocomplete duplicates
+                           !self.slice(0, idx).some((el) => el.city === item.city))
+                     );
+                  })
+                  .slice(0, 4)
+                  .map((job) => (
+                     <div
+                        key={job._id}
+                        className={styles.dropdownItem}
+                        onClick={() => setSearchValue(job[searchFor])}
+                     >
+                        {highlightMatch(job[searchFor])}
+                        {searchFor === 'title' && <p>{job.companyName}</p>}
+                     </div>
+                  ))}
+            </div>
+         )}
       </div>
    );
 };

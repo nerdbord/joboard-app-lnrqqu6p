@@ -16,12 +16,14 @@ function SearchSection(): React.ReactElement {
    return (
       <section className={styles.container}>
          <SearchBar
+            zIndex={2}
             jobs={jobs}
             searchFor="title"
             searchValue={searchTitle}
             setSearchValue={setSearchTitle}
          />
          {/* <SearchBar
+            zIndex={1}
             jobs={jobs}
             searchFor="city"
             searchValue={searchLocation}

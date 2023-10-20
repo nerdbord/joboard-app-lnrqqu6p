@@ -29,13 +29,15 @@ function SearchSection(): React.ReactElement {
             searchValue={searchLocation}
             setSearchValue={setSearchLocation}
          /> */}
-         <div className={styles.information}>
-            <p>
-               {filteredJobs.length} offer{filteredJobs.length > 1 && 's'} found
-               {searchTitle && ` for "${searchTitle}"`}
-            </p>
-            <span onClick={clearSearch}>Clear search</span>
-         </div>
+         {filteredJobs && (
+            <div className={styles.information}>
+               <p>
+                  {filteredJobs.length} offer{filteredJobs.length > 1 && 's'} found
+                  {searchTitle && ` for "${searchTitle}"`}
+               </p>
+               {searchTitle && <span onClick={clearSearch}>Clear search</span>}
+            </div>
+         )}
       </section>
    );
 }

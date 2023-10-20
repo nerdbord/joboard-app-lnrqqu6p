@@ -1,13 +1,16 @@
+import { QueryFunction, QueryKey } from '@tanstack/query-core';
 import axios from 'axios';
+import { IJobs } from './types';
 
-export const getJobs = async () => {
+export const getJobs:QueryFunction<IJobs, QueryKey> = async () => {
    try {
       const jobs = await axios.get('https://training.nerdbord.io/api/v1/joboard/offers', {
          headers: {
-            Accept: 'application/json',
+            "Content-Type": 'application/json',
+            "Accept": 'application/json',
          },
       });
-      return jobs;
+      return jobs.data;
    } catch (error) {
       throw new Error(error);
    }

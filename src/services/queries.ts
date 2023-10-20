@@ -9,6 +9,6 @@ export const getJobs = async () => {
       });
       return jobs;
    } catch (error) {
-      console.log(error);
+      throw new Error(error)
    }
 };

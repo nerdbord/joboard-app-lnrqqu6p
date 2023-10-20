@@ -12,14 +12,13 @@ const JobList: React.FC = () => {
 
    if (isError) {
       return <div>Error occurred while fetching jobs.</div>;
-    }
-    
-    if (isPending) {
+   }
+
+   if (isPending) {
       return <div>Loading...</div>;
-    }
+   }
 
    return (
-      
       <section>
          {jobs?.map(({ _id, title }) => (
             <p key={_id}>{title}</p>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getJobs = async ()  => {
+export const getJobs = async () => {
    try {
       const jobs = await axios.get('https://training.nerdbord.io/api/v1/joboard/offers', {
          headers: {
@@ -12,6 +12,3 @@ export const getJobs = async ()  => {
       console.log(error);
    }
 };
-
-
-

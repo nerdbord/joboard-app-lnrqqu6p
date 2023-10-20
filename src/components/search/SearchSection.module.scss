@@ -1,12 +1,10 @@
 .container {
-    // max-width: calc(392px*2 + 14px);
-    max-width: min-content;
+    max-width: calc(392px*2 + 14px);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    // background-color: #F8F8F8;
 }
 
 .information {
@@ -15,13 +13,14 @@
     align-items: center;
     gap: 16px;
     margin-top: 12px;
+
     p {
-        margin:0;
+        margin: 0;
         font-size: 16px;
         font-weight: 600;
         letter-spacing: -0.8px;
-        // color: #212121;
     }
+
     span {
         font-size: 12px;
         font-weight: 500;

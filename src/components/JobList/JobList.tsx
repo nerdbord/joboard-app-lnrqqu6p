@@ -1,13 +1,8 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getJobs } from '../../services/queries';
-import { IJobs } from '../../services/types';
+import { queryJobs } from '../../services/queries';
 
 const JobList: React.FC = () => {
-   const { isError, isPending, data } = useQuery<IJobs>({
-      queryKey: ['jobs'],
-      queryFn: getJobs,
-   });
+   const { isError, isPending, data } = queryJobs()
    const jobs = data;
 
    if (isError) {

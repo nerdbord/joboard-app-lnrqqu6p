@@ -1,8 +1,8 @@
 import React from 'react';
-import { queryJobs } from '../../services/queries';
+import { useGetJobs } from '../../services/queries';
 
 const JobList: React.FC = () => {
-   const { isError, isPending, data } = queryJobs();
+   const { isError, isPending, data } = useGetJobs();
    const jobs = data;
 
    if (isError) {

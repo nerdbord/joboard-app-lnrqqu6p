@@ -19,7 +19,7 @@ export const getJobs: QueryFunction<IJobs, QueryKey> = async () => {
 
 const queryJobsKey = 'jobs';
 
-export const queryJobs = () => {
+export const useGetJobs = () => {
    return useQuery<IJobs>({
       queryKey: [queryJobsKey],
       queryFn: getJobs,

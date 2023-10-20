@@ -17,7 +17,7 @@ export interface IJob {
    title: string;
    updatedAt: string;
    workLocation: string;
-   _v: number;
+   __v: number;
    _id: string;
 }
 

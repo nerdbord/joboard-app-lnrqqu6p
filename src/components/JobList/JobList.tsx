@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGetJobs } from '../../services/queries';
+import useJobsStore from '../../store/useJobsStore';
 
 const JobList: React.FC = () => {
    const { isError, isPending, data } = useGetJobs();
-   const jobs = data;
+   const { setJobs, filteredJobs } = useJobsStore();
+
+   useEffect(() => {
+      data && setJobs(data);
+   }, [data]);
 
    if (isError) {
       return <div>Error occurred while fetching jobs.</div>;
@@ -15,7 +20,7 @@ const JobList: React.FC = () => {
 
    return (
       <section>
-         {jobs?.map(({ _id, title }) => (
+         {filteredJobs?.map(({ _id, title }) => (
             <p key={_id}>{title}</p>
          ))}
       </section>

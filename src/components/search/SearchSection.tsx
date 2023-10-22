@@ -22,20 +22,21 @@ function SearchSection(): React.ReactElement {
             searchValue={searchTitle}
             setSearchValue={setSearchTitle}
          />
-         {/* <SearchBar
+         <SearchBar
             zIndex={1}
             jobs={jobs}
             searchFor="city"
             searchValue={searchLocation}
             setSearchValue={setSearchLocation}
-         /> */}
+         />
          {filteredJobs && (
             <div className={styles.information}>
                <p>
                   {filteredJobs.length} offer{filteredJobs.length > 1 && 's'} found
-                  {searchTitle && ` for "${searchTitle}"`}
+                  {searchTitle && ` for "${searchTitle}" `}
+                  {searchLocation && ` in "${searchLocation}"`}
                </p>
-               {searchTitle && <span onClick={clearSearch}>Clear search</span>}
+               {(searchTitle || searchLocation) && <span onClick={clearSearch}>Clear search</span>}
             </div>
          )}
       </section>

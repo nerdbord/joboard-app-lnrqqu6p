@@ -1,0 +1,74 @@
+$greyLight:#DADADA;
+$white: #FFFFFF;
+$greyDarkest: #212121;
+$greyDark: #545454;
+$accent: #9564D4;
+$offer-details-gap: 14px;
+
+.offer {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $greyLight;
+  border-radius: 5px;
+  background-color: $white;
+  padding: 20px;
+  column-gap: 10px;
+  font-family: "Poppins";
+}
+
+.logo {
+  high: 46px;
+  width: 46px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: $greyDarkest;
+  line-height: 26px;
+}
+
+.offer-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.offer-details {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: $offer-details-gap;
+}
+.company {
+  font-size:12px;
+  line-height: 12px;
+  font-weight: 500;
+  color: $greyDark;
+}
+.location-seniority {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size:12px;
+  line-height: 12px;
+  font-weight: 400;
+  color: $greyDark;
+  column-gap: $offer-details-gap;
+}
+.salary {
+  color: $accent;
+}
+
+.separator {
+  border-right: 1px solid $greyLight;
+}
+
+.days-elapsed {
+  font-size:12px;
+  line-height: 12px;
+  font-weight: 400;
+  text-align: right;
+  color: $greyDark;
+}

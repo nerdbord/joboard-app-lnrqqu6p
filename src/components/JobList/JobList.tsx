@@ -5,6 +5,7 @@ import useJobsStore from '../../store/useJobsStore';
 const JobList: React.FC = () => {
    const { isError, isPending, data } = useGetJobs();
    const { setJobs, filteredJobs } = useJobsStore();
+   console.log(filteredJobs);
 
    useEffect(() => {
       data && setJobs(data);

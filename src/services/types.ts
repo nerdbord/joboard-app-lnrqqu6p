@@ -26,3 +26,24 @@ export type IJobs = IJob[];
 export type PropsWithChildren = {
    children: ReactNode;
 };
+
+export const initialOffer: IJob = {
+   city: '',
+   companyName: '',
+   country: '',
+   createdAt: '',
+   currency: '',
+   description: '',
+   image: '',
+   jobType: '',
+   offerUrl: '',
+   salaryFrom: 0,
+   salaryTo: 0,
+   seniority: '',
+   technologies: [''],
+   title: '',
+   updatedAt: '',
+   workLocation: '',
+   __v: 0,
+   _id: '',
+};

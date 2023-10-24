@@ -1,13 +1,15 @@
 import { create } from 'zustand';
-import type { IJobs } from '../services/types';
+import { initialOffer, type IJob, type IJobs } from '../services/types';
 
 interface JobsStore {
    jobs: IJobs;
    filteredJobs: IJobs;
    searchTitle: string;
    searchLocation: string;
+   offer: IJob;
 
    setJobs: (value: IJobs) => void;
+   setOffer: (value: IJob) => void;
    clearSearch: () => void;
    setSearchTitle: (value: string) => void;
    setSearchLocation: (value: string) => void;
@@ -18,8 +20,10 @@ const useJobsStore = create<JobsStore>((set) => ({
    filteredJobs: [],
    searchTitle: '',
    searchLocation: '',
+   offer: initialOffer,
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
+   setOffer: (value) => set({ offer: value }),
    clearSearch: () =>
       set((state) => ({ filteredJobs: state.jobs, searchTitle: '', searchLocation: '' })),
    setSearchTitle: (value) => {

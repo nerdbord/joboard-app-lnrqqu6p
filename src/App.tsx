@@ -4,6 +4,7 @@ import { Container } from './components/Container/Container';
 import JobList from './components/JobList/JobList';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SearchSection from './components/search/SearchSection';
+import JobOfferContainer from './components/JobOffer/JobOfferContainer';
 
 const queryClient = new QueryClient();
 
@@ -14,6 +15,7 @@ function App(): React.ReactElement {
             <h1>JoBoard 🛹</h1>
             <SearchSection />
             <JobList />
+            {/* <JobOfferContainer /> */}
          </Container>
       </QueryClientProvider>
    );

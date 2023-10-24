@@ -22,7 +22,7 @@ const JobList: React.FC = () => {
 
    return (
       <div className={styles.jobOffersList}>
-         {data && data.map((offer) => <JobCard key={offer._id} {...offer} />)}
+         {filteredJobs && filteredJobs.map((offer) => <JobCard key={offer._id} {...offer} />)}
       </div>
    );
 };

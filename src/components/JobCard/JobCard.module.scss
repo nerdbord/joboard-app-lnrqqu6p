@@ -1,0 +1,67 @@
+.offer {
+   display: flex;
+   flex-direction: row;
+   border: 1px solid #dadada;
+   border-radius: 5px;
+   background-color: #ffffff;
+   padding: 20px;
+   column-gap: 10px;
+   font-family: 'Poppins';
+}
+
+.logo {
+   height: 46px;
+   width: 46px;
+}
+.title {
+   font-size: 20px;
+   font-weight: 600;
+   color: #212121;
+   line-height: 26px;
+}
+
+.offer-data {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   flex-grow: 1;
+}
+
+.offer-details {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   column-gap: 14px;
+}
+.company {
+   font-size: 12px;
+   line-height: 12px;
+   font-weight: 500;
+   color: #545454;
+}
+.location-seniority {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   font-size: 12px;
+   line-height: 12px;
+   font-weight: 400;
+   color: #545454;
+   column-gap: 14px;
+}
+.salary {
+   color: #9564d4;
+}
+
+.separator {
+   border-right: 1px solid #dadada;
+}
+
+.days-elapsed {
+   font-size: 12px;
+   line-height: 12px;
+   font-weight: 400;
+   text-align: right;
+   color: #545454;
+}

@@ -3,13 +3,13 @@
 @import '@fontsource/poppins/700.css';
 
 :root {
-   font-family: "Poppins",Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+   font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
    line-height: 1.5;
    font-weight: 400;
-   
+
    color-scheme: light dark;
    color: #212121;
-   background-color: #FFF;
+   background-color: #fff;
 
    font-synthesis: none;
    text-rendering: optimizeLegibility;

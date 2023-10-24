@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useGetJobs } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
-import {inspect} from "util";
-import styles from './JobList.module.scss'
-import JobCard from "../JobCard/JobCard";
+import { inspect } from 'util';
+import styles from './JobList.module.scss';
+import JobCard from '../JobCard/JobCard';
 
 const JobList: React.FC = () => {
    const { isError, isPending, data } = useGetJobs();
@@ -27,9 +27,9 @@ const JobList: React.FC = () => {
       //       <p key={_id}>{title}</p>
       //    ))}
       // </section>
-       <div className={styles['job-offers-list']}>
-          {data && data.map(offer => <JobCard key={offer._id} {...offer}/>)}
-       </div>
+      <div className={styles['job-offers-list']}>
+         {data && data.map((offer) => <JobCard key={offer._id} {...offer} />)}
+      </div>
    );
 };
 

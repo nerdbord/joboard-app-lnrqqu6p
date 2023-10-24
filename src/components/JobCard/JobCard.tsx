@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './JobCard.module.scss';
-import {IJob} from "../../services/types";
+import { IJob } from '../../services/types';
 
 function JobCard(props: IJob) {
    return (
@@ -50,7 +50,8 @@ function DaysElapsed(props: IJob) {
 function countDaysAgo(createdAt: string): number {
    const createdAtDate = new Date(createdAt);
    const today = new Date();
-   const daysDiff = today.getDay() - createdAtDate.getDay();
+   const timeDiff = today.getTime() - createdAtDate.getTime();
+   const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
    return daysDiff;
 }
 

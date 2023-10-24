@@ -4,13 +4,13 @@ import { IJob } from '../../services/types';
 
 function JobCard(props: IJob) {
    return (
-      <div className={styles['offer']}>
-         <img src={props.image} alt="logo" className={styles['logo']} />
-         <div className={styles['offer-data']}>
-            <div className={styles['title']}>{props.title}</div>
-            <div className={styles['offer-details']}>
-               <div className={styles['company']}>{props.companyName}</div>
-               <div className={styles['location-seniority']}>
+      <div className={styles.offer}>
+         <img src={props.image} alt="logo" className={styles.logo} />
+         <div className={styles.offerData}>
+            <div className={styles.title}>{props.title}</div>
+            <div className={styles.offerDetails}>
+               <div className={styles.company}>{props.companyName}</div>
+               <div className={styles.locationSeniority}>
                   <Separator />
                   <div>
                      {props.city}, {props.country}
@@ -20,7 +20,7 @@ function JobCard(props: IJob) {
                   <Separator />
                   <div>{props.seniority}</div>
                   <Separator />
-                  <div className={styles['salary']}>
+                  <div className={styles.salary}>
                      {props.salaryFrom} - {props.salaryTo} {props.currency} net
                   </div>
                </div>
@@ -32,18 +32,18 @@ function JobCard(props: IJob) {
 }
 
 function Separator() {
-   return <div className={styles['separator']}></div>;
+   return <div className={styles.separator}></div>;
 }
 
 function DaysElapsed(props: IJob) {
    const daysElapsed = countDaysAgo(props.createdAt);
    switch (daysElapsed) {
       case 0:
-         return <div className={styles['days-elapsed']}>today</div>;
+         return <div className={styles.daysElapsed}>today</div>;
       case 1:
-         return <div className={styles['days-elapsed']}>{daysElapsed} day ago</div>;
+         return <div className={styles.daysElapsed}>{daysElapsed} day ago</div>;
       default:
-         return <div className={styles['days-elapsed']}>{daysElapsed} days ago</div>;
+         return <div className={styles.daysElapsed}>{daysElapsed} days ago</div>;
    }
 }
 

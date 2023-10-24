@@ -21,14 +21,14 @@
    text-align: left;
 }
 
-.offer-data {
+.offerData {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
    flex-grow: 1;
 }
 
-.offer-details {
+.offerDetails {
    display: flex;
    flex-direction: row;
    justify-content: flex-start;
@@ -41,7 +41,7 @@
    font-weight: 500;
    color: #545454;
 }
-.location-seniority {
+.locationSeniority {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
@@ -59,7 +59,7 @@
    border-right: 1px solid #dadada;
 }
 
-.days-elapsed {
+.daysElapsed {
    font-size: 12px;
    line-height: 12px;
    font-weight: 400;

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useGetJobs } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
+import styles from './JobList.module.scss';
+import JobCard from '../JobCard/JobCard';
 
 const JobList: React.FC = () => {
    const { isError, isPending, data } = useGetJobs();
@@ -19,11 +21,9 @@ const JobList: React.FC = () => {
    }
 
    return (
-      <section>
-         {filteredJobs?.map(({ _id, title }) => (
-            <p key={_id}>{title}</p>
-         ))}
-      </section>
+      <div className={styles.jobOffersList}>
+         {filteredJobs && filteredJobs.map((offer) => <JobCard key={offer._id} {...offer} />)}
+      </div>
    );
 };
 

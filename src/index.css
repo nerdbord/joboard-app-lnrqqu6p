@@ -40,8 +40,10 @@ body {
 }
 
 h1 {
-   font-size: 3.2em;
-   line-height: 1.1;
+   font-size: 27px;
+   line-height: 27px;
+   letter-spacing: -1.89px; 
+   font-weight: 700; 
 }
 
 button {

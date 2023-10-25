@@ -42,9 +42,9 @@ export const getOffer: QueryFunction<IJob, QueryKey> = async (id) => {
 
 const queryOfferByIdKey = 'offer';
 
-export const useGetOfferById = () => {
+export const useGetOfferById = (id) => {
    return useQuery<IJob>({
-      queryKey: [queryOfferByIdKey],
-      queryFn: getOffer,
+      queryKey: [queryOfferByIdKey, id],
+      queryFn: () => getOffer(id),
    });
 };

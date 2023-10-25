@@ -3,8 +3,8 @@ import { useGetOfferById } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
 
 const JobOffer: React.FC = () => {
-   const { isError, isPending } = useGetOfferById();
-   const { offer } = useJobsStore();
+   const { offer, currentOfferId } = useJobsStore();
+   const { isError, isPending } = useGetOfferById(currentOfferId);
 
    if (isError) {
       return <div>Error occurred while fetching jobs.</div>;
@@ -16,7 +16,7 @@ const JobOffer: React.FC = () => {
 
    return (
       <>
-         {Object(offer)?.entries.map(
+         {Array(offer).map(
             ({
                city,
                companyName,
@@ -42,8 +42,8 @@ const JobOffer: React.FC = () => {
                         <div>
                            <h2>{title.toUpperCase()}</h2>
                            <p>
-                              {technologies.forEach((technology) => {
-                                 if (technologies.indexOf(technology < technologies.length - 1)) {
+                              {technologies.map((technology) => {
+                                 if (technologies.indexOf(technology) < technologies.length - 1) {
                                     return `${technology.toUpperCase()} *`;
                                  }
                               })}

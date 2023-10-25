@@ -1,10 +1,19 @@
 import React from 'react';
 import styles from './JobCard.module.scss';
 import { IJob } from '../../services/types';
+import { useGetOfferById } from '../../services/queries';
+import useJobsStore from '../../store/useJobsStore';
 
 function JobCard(props: IJob) {
+   const { data } = useGetOfferById(props._id);
+   const { setOffer, setCurrentOfferId, setIsOfferWindowOper, isOfferWindowOpen } = useJobsStore();
+   const handleCardOnClick = () => {
+      setOffer(data);
+      setCurrentOfferId(props._id);
+      setIsOfferWindowOper(!isOfferWindowOpen);
+   };
    return (
-      <div className={styles.offer}>
+      <div className={styles.offer} onClick={handleCardOnClick}>
          <img src={props.image} alt="logo" className={styles.logo} />
          <div className={styles.offerData}>
             <div className={styles.title}>{props.title}</div>

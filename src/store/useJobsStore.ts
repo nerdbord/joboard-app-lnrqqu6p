@@ -7,12 +7,16 @@ interface JobsStore {
    searchTitle: string;
    searchLocation: string;
    offer: IJob;
+   currentOfferId: string;
+   isOfferWindowOpen: boolean;
 
    setJobs: (value: IJobs) => void;
    setOffer: (value: IJob) => void;
+   setCurrentOfferId: (value: string) => void;
    clearSearch: () => void;
    setSearchTitle: (value: string) => void;
    setSearchLocation: (value: string) => void;
+   setIsOfferWindowOper: (value: boolean) => void;
 }
 
 const useJobsStore = create<JobsStore>((set) => ({
@@ -21,9 +25,12 @@ const useJobsStore = create<JobsStore>((set) => ({
    searchTitle: '',
    searchLocation: '',
    offer: initialOffer,
+   currentOfferId: '',
+   isOfferWindowOpen: false,
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
    setOffer: (value) => set({ offer: value }),
+   setCurrentOfferId: (value) => set({ currentOfferId: value }),
    clearSearch: () =>
       set((state) => ({ filteredJobs: state.jobs, searchTitle: '', searchLocation: '' })),
    setSearchTitle: (value) => {
@@ -34,6 +41,7 @@ const useJobsStore = create<JobsStore>((set) => ({
       set({ searchLocation: value });
       setFilteredJobs(set);
    },
+   setIsOfferWindowOper: (value) => set({ isOfferWindowOpen: value }),
 }));
 
 const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStore>) => void) => {

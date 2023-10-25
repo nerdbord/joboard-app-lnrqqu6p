@@ -1,12 +1,8 @@
 import React from 'react';
-import JobOffer from './JobOffer';
+import { PropsWithChildren } from '../../services/types';
 
-const JobOfferContainer: React.FC = () => {
-   return (
-      <article>
-         <JobOffer />
-      </article>
-   );
+const JobOfferContainer: React.FC<PropsWithChildren> = ({ children }) => {
+   return <article>{children}</article>;
 };
 
 export default JobOfferContainer;

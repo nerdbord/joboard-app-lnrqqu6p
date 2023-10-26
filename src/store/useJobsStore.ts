@@ -8,18 +8,29 @@ type JobType = {
    freelance: boolean;
 };
 
+type JobSeniority = {
+   lead: boolean;
+   expert: boolean;
+   senior: boolean;
+   midRegular: boolean;
+   junior: boolean;
+   intern: boolean;
+};
+
 interface JobsStore {
    jobs: IJobs;
    filteredJobs: IJobs;
    searchTitle: string;
    searchLocation: string;
    jobType: JobType;
+   jobSeniority: JobSeniority;
 
    setJobs: (value: IJobs) => void;
    clearSearch: () => void;
    setSearchTitle: (value: string) => void;
    setSearchLocation: (value: string) => void;
    setJobType: (key: keyof JobType, value: boolean) => void;
+   setJobSeniority: (key: keyof JobSeniority, value: boolean) => void;
 }
 
 const useJobsStore = create<JobsStore>((set) => ({
@@ -28,6 +39,14 @@ const useJobsStore = create<JobsStore>((set) => ({
    searchTitle: '',
    searchLocation: '',
    jobType: { fullTime: false, contract: false, partTime: false, freelance: false },
+   jobSeniority: {
+      lead: false,
+      expert: false,
+      senior: false,
+      midRegular: false,
+      junior: false,
+      intern: false,
+   },
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
    clearSearch: () => {
@@ -48,6 +67,12 @@ const useJobsStore = create<JobsStore>((set) => ({
       }));
       setFilteredJobs(set);
    },
+   setJobSeniority: (key, value) => {
+      set((state) => ({
+         jobSeniority: { ...state.jobSeniority, [key]: value },
+      }));
+      setFilteredJobs(set);
+   },
 }));
 
 // Filter jobs by search values and filter settings
@@ -63,7 +88,14 @@ const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStor
                (state.jobType.fullTime && job.jobType === 'Full-time') ||
                (state.jobType.contract && job.jobType === 'Contract') ||
                (state.jobType.partTime && job.jobType === 'Part-time') ||
-               (state.jobType.freelance && job.jobType === 'Freelance'))
+               (state.jobType.freelance && job.jobType === 'Freelance')) &&
+            (!isAnySelected(state.jobSeniority) ||
+               (state.jobSeniority.lead && job.seniority === 'Lead') ||
+               (state.jobSeniority.expert && job.seniority === 'Expert') ||
+               (state.jobSeniority.senior && job.seniority === 'Senior') ||
+               (state.jobSeniority.midRegular && job.seniority === 'Mid/Regular') ||
+               (state.jobSeniority.junior && job.seniority === 'Junior') ||
+               (state.jobSeniority.intern && job.seniority === 'Intern'))
          );
       }),
    }));

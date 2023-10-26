@@ -31,6 +31,7 @@ interface JobsStore {
    jobType: JobType;
    jobSeniority: JobSeniority;
    jobLocation: JobLocation;
+   jobSalary: number;
 
    setJobs: (value: IJobs) => void;
    clearSearch: () => void;
@@ -39,6 +40,7 @@ interface JobsStore {
    setJobType: (key: keyof JobType, value: boolean) => void;
    setJobSeniority: (key: keyof JobSeniority, value: boolean) => void;
    setJobLocation: (key: keyof JobLocation, value: boolean) => void;
+   setJobSalary: (value: number) => void;
 }
 
 const useJobsStore = create<JobsStore>((set) => ({
@@ -56,6 +58,7 @@ const useJobsStore = create<JobsStore>((set) => ({
       intern: false,
    },
    jobLocation: { remote: false, partRemote: false, onSite: false },
+   jobSalary: 0,
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
    clearSearch: () => {
@@ -88,6 +91,10 @@ const useJobsStore = create<JobsStore>((set) => ({
       }));
       setFilteredJobs(set);
    },
+   setJobSalary: (value) => {
+      set({ jobSalary: value });
+      setFilteredJobs(set);
+   },
 }));
 
 // Filter jobs by search values and filter settings
@@ -114,7 +121,8 @@ const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStor
             (!isAnySelected(state.jobLocation) ||
                (state.jobLocation.remote && job.workLocation === 'Remote') ||
                (state.jobLocation.partRemote && job.workLocation === 'Part-remote') ||
-               (state.jobLocation.onSite && job.workLocation === 'On-site'))
+               (state.jobLocation.onSite && job.workLocation === 'On-site')) &&
+            (state.jobSalary === 0 || job.salaryFrom >= state.jobSalary)
          );
       }),
    }));

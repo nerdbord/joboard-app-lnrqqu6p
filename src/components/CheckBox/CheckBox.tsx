@@ -2,31 +2,27 @@ import React from 'react';
 import styles from './CheckBox.module.scss';
 import CheckBoxTrue from '../icons/CheckBox/CheckBoxTrue';
 import CheckBoxFalse from '../icons/CheckBox/CheckBoxFalse';
-type JobType = {
-   fullTime: boolean;
-   contract: boolean;
-   partTime: boolean;
-   freelance: boolean;
+
+export type Option = {
+   keyName: string;
+   label: string;
+   value: boolean;
+   setValue: (keyName: string, value: boolean) => void;
 };
 
-type Data = {
-   value: boolean;
-   setValue: (key: keyof JobType, value: boolean ) => void;
-   key: keyof JobType;
-   label: string;
-};
 interface Props {
-   data: Data;
+   option: Option;
 }
 
-const CheckBox: React.FC<Props> = ({ data }) => {
+const CheckBox: React.FC<Props> = ({ option }) => {
+   const { keyName, label, value, setValue } = option;
    const updateValue = () => {
-    data.setValue(data.key,!data.value)
+      setValue(keyName, !value);
    };
    return (
       <div className={styles.container} onClick={updateValue}>
-         <div className={styles.icon}>{data.value ? <CheckBoxTrue /> : <CheckBoxFalse />}</div>
-         <span>{data.label}</span>
+         <div className={styles.icon}>{value ? <CheckBoxTrue /> : <CheckBoxFalse />}</div>
+         <span>{label}</span>
       </div>
    );
 };

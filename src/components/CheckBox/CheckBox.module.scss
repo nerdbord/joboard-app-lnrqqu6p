@@ -1,0 +1,18 @@
+.container {
+    width: 115px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    cursor: pointer;
+    span {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 130%;
+    }
+}
+
+.icon{
+    position: relative;
+    width: 27px; /* Set the desired width */
+    height: 27px;
+}

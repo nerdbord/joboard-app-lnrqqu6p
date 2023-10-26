@@ -41,6 +41,7 @@ interface JobsStore {
    setJobSeniority: (key: keyof JobSeniority, value: boolean) => void;
    setJobLocation: (key: keyof JobLocation, value: boolean) => void;
    setJobSalary: (value: number) => void;
+   clearFilters: () => void;
 }
 
 const useJobsStore = create<JobsStore>((set) => ({
@@ -95,6 +96,15 @@ const useJobsStore = create<JobsStore>((set) => ({
       set({ jobSalary: value });
       setFilteredJobs(set);
    },
+   clearFilters: () => {
+      set((state) => ({
+         jobType: resetAllPoperties(state.jobType) as JobType,
+         jobSeniority: resetAllPoperties(state.jobSeniority) as JobSeniority,
+         jobLocation: resetAllPoperties(state.jobLocation) as JobLocation,
+         jobSalary: 0,
+      }));
+      setFilteredJobs(set);
+   },
 }));
 
 // Filter jobs by search values and filter settings
@@ -131,6 +141,16 @@ const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStor
 // Check if any value in an object is true
 const isAnySelected = (obj: Object) => {
    return Object.values(obj).some((value) => value === true);
+};
+
+// Set each object property to false
+const resetAllPoperties = (obj: Object) => {
+   for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+         obj[key] = false;
+      }
+   }
+   return obj;
 };
 
 export default useJobsStore;

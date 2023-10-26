@@ -13,6 +13,7 @@ function JobFiltersSection(): React.ReactElement {
       setJobLocation,
       jobSalary,
       setJobSalary,
+      clearFilters,
    } = useJobsStore();
 
    const jobFilters = [
@@ -43,7 +44,7 @@ function JobFiltersSection(): React.ReactElement {
       <section className={styles.container}>
          <div className={styles.header}>
             <p>Filter offers</p>
-            <span>Clear filters</span>
+            <span onClick={clearFilters}>Clear filters</span>
          </div>
 
          <div className={styles.filtersContainer}>

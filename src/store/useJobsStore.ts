@@ -30,8 +30,10 @@ const useJobsStore = create<JobsStore>((set) => ({
    jobType: { fullTime: false, contract: false, partTime: false, freelance: false },
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
-   clearSearch: () =>
-      set((state) => ({ filteredJobs: state.jobs, searchTitle: '', searchLocation: '' })),
+   clearSearch: () => {
+      set((state) => ({ filteredJobs: state.jobs, searchTitle: '', searchLocation: '' }));
+      setFilteredJobs(set);
+   },
    setSearchTitle: (value) => {
       set({ searchTitle: value });
       setFilteredJobs(set);
@@ -48,6 +50,7 @@ const useJobsStore = create<JobsStore>((set) => ({
    },
 }));
 
+// Filter jobs by search values and filter settings
 const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStore>) => void) => {
    set((state) => ({
       filteredJobs: state.jobs.filter((job) => {
@@ -56,13 +59,19 @@ const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStor
                job.title.toLowerCase().includes(state.searchTitle.toLowerCase())) &&
             (!state.searchLocation ||
                job.city.toLowerCase().includes(state.searchLocation.toLowerCase())) &&
-            (!state.jobType.fullTime || job.jobType === 'Full-time') &&
-            (!state.jobType.contract || job.jobType === 'Contract') &&
-            (!state.jobType.partTime || job.jobType === 'Part-time') &&
-            (!state.jobType.freelance || job.jobType === 'Freelance')
+            (!isAnySelected(state.jobType) ||
+               (state.jobType.fullTime && job.jobType === 'Full-time') ||
+               (state.jobType.contract && job.jobType === 'Contract') ||
+               (state.jobType.partTime && job.jobType === 'Part-time') ||
+               (state.jobType.freelance && job.jobType === 'Freelance'))
          );
       }),
    }));
+};
+
+// Check if any value in an object is true
+const isAnySelected = (obj: Object) => {
+   return Object.values(obj).some((value) => value === true);
 };
 
 export default useJobsStore;

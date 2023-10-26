@@ -4,7 +4,16 @@ import JobFilter from './JobFilter';
 import useJobsStore from '../../store/useJobsStore';
 
 function JobFiltersSection(): React.ReactElement {
-   const { jobType, setJobType, jobSeniority, setJobSeniority, jobLocation, setJobLocation } = useJobsStore();
+   const {
+      jobType,
+      setJobType,
+      jobSeniority,
+      setJobSeniority,
+      jobLocation,
+      setJobLocation,
+      jobSalary,
+      setJobSalary,
+   } = useJobsStore();
 
    const jobFilters = [
     {filterLabel: "Job Type", filterOptions: [
@@ -26,6 +35,9 @@ function JobFiltersSection(): React.ReactElement {
       { keyName: 'partRemote', label: 'Part-Remote', value: jobLocation.partRemote, setValue: setJobLocation },
       { keyName: 'onSite', label: 'On-Site', value: jobLocation.onSite, setValue: setJobLocation },
     ]},
+    {filterLabel: "Salary (min.)", filterOptions: 
+      { value: jobSalary, setValue: setJobSalary },
+    },
   ];
    return (
       <section className={styles.container}>

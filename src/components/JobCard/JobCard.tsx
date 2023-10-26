@@ -35,43 +35,42 @@ function JobCard(props: IJob) {
                </div>
             </div>
             <div className={styles.colSalaryDays}>
-                <div className={styles.salary}>
-                    {props.salaryFrom} - {props.salaryTo} {props.currency} net
-                </div>
-                <DaysElapsed {...props} />
+               <div className={styles.salary}>
+                  {props.salaryFrom} - {props.salaryTo} {props.currency} net
+               </div>
+               <DaysElapsed {...props} />
             </div>
-        </div>
-    );
+         </div>
+      </div>
+   );
 }
 
 function Separator() {
-    return <div className={styles.separator}></div>;
+   return <div className={styles.separator}></div>;
 }
 
 function Marginal() {
-    return <div className={styles.marginal}></div>;
+   return <div className={styles.marginal}></div>;
 }
 
 function DaysElapsed(props: IJob) {
-    const daysElapsed = countDaysAgo(props.createdAt);
-    switch (daysElapsed) {
-        case 0:
-            return <div className={styles.daysElapsed}>today</div>;
-        case 1:
-            return <div className={styles.daysElapsed}>{daysElapsed} day ago</div>;
-        default:
-            return <div className={styles.daysElapsed}>{daysElapsed} days ago</div>;
-    }
+   const daysElapsed = countDaysAgo(props.createdAt);
+   switch (daysElapsed) {
+      case 0:
+         return <div className={styles.daysElapsed}>today</div>;
+      case 1:
+         return <div className={styles.daysElapsed}>{daysElapsed} day ago</div>;
+      default:
+         return <div className={styles.daysElapsed}>{daysElapsed} days ago</div>;
+   }
 }
 
 function countDaysAgo(createdAt: string): number {
-    const createdAtDate = new Date(createdAt);
-    const today = new Date();
-    const timeDiff = today.getTime() - createdAtDate.getTime();
-    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    return daysDiff;
+   const createdAtDate = new Date(createdAt);
+   const today = new Date();
+   const timeDiff = today.getTime() - createdAtDate.getTime();
+   const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+   return daysDiff;
 }
 
 export default JobCard;
-
-

@@ -21,6 +21,10 @@ export interface IJob {
    _id: string;
 }
 
+export interface IOffer {
+   offer: IJob;
+}
+
 export type IJobs = IJob[];
 
 export type PropsWithChildren = {

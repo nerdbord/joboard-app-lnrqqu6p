@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { IJobs } from '../services/types';
+import { IJob, IJobs, initialOffer } from '../services/types';
 
 type JobType = {
    fullTime: boolean;
@@ -22,20 +22,32 @@ type JobLocation = {
    partRemote: boolean;
    onSite: boolean;
 };
-import { initialOffer, type IJob, type IJobs } from '../services/types';
 
 interface JobsStore {
    jobs: IJobs;
    filteredJobs: IJobs;
    searchTitle: string;
    searchLocation: string;
+   jobType: JobType;
+   jobSeniority: JobSeniority;
+   jobLocation: JobLocation;
+   jobSalary: number;
+   offer: IJob;
+   currentOfferId: string;
+   isOfferWindowOpen: boolean;
 
    setJobs: (value: IJobs) => void;
-   setOffer: (value: IJob) => void;
-   setCurrentOfferId: (value: string) => void;
    clearSearch: () => void;
    setSearchTitle: (value: string) => void;
    setSearchLocation: (value: string) => void;
+   setJobType: (key: keyof JobType, value: boolean) => void;
+   setJobSeniority: (key: keyof JobSeniority, value: boolean) => void;
+   setJobLocation: (key: keyof JobLocation, value: boolean) => void;
+   setJobSalary: (value: number) => void;
+   clearFilters: () => void;
+   setOffer: (value: IJob) => void;
+   setCurrentOfferId: (value: string) => void;
+   setIsOfferWindowOper: (value: boolean) => void;
 }
 
 const useJobsStore = create<JobsStore>((set) => ({
@@ -43,10 +55,26 @@ const useJobsStore = create<JobsStore>((set) => ({
    filteredJobs: [],
    searchTitle: '',
    searchLocation: '',
+   jobType: { fullTime: false, contract: false, partTime: false, freelance: false },
+   jobSeniority: {
+      lead: false,
+      expert: false,
+      senior: false,
+      midRegular: false,
+      junior: false,
+      intern: false,
+   },
+   jobLocation: { remote: false, partRemote: false, onSite: false },
+   jobSalary: 0,
+   offer: initialOffer,
+   currentOfferId: '',
+   isOfferWindowOpen: false,
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
-   clearSearch: () =>
-      set((state) => ({ filteredJobs: state.jobs, searchTitle: '', searchLocation: '' })),
+   clearSearch: () => {
+      set((state) => ({ filteredJobs: state.jobs, searchTitle: '', searchLocation: '' }));
+      setFilteredJobs(set);
+   },
    setSearchTitle: (value) => {
       set({ searchTitle: value });
       setFilteredJobs(set);
@@ -55,8 +83,43 @@ const useJobsStore = create<JobsStore>((set) => ({
       set({ searchLocation: value });
       setFilteredJobs(set);
    },
+   setJobType: (key, value) => {
+      set((state) => ({
+         jobType: { ...state.jobType, [key]: value },
+      }));
+      setFilteredJobs(set);
+   },
+   setJobSeniority: (key, value) => {
+      set((state) => ({
+         jobSeniority: { ...state.jobSeniority, [key]: value },
+      }));
+      setFilteredJobs(set);
+   },
+   setJobLocation: (key, value) => {
+      set((state) => ({
+         jobLocation: { ...state.jobLocation, [key]: value },
+      }));
+      setFilteredJobs(set);
+   },
+   setJobSalary: (value) => {
+      set({ jobSalary: value });
+      setFilteredJobs(set);
+   },
+   clearFilters: () => {
+      set((state) => ({
+         jobType: resetAllPoperties(state.jobType) as JobType,
+         jobSeniority: resetAllPoperties(state.jobSeniority) as JobSeniority,
+         jobLocation: resetAllPoperties(state.jobLocation) as JobLocation,
+         jobSalary: 0,
+      }));
+      setFilteredJobs(set);
+   },
+   setOffer: (value) => set({ offer: value }),
+   setCurrentOfferId: (value) => set({ currentOfferId: value }),
+   setIsOfferWindowOper: (value) => set({ isOfferWindowOpen: value }),
 }));
 
+// Filter jobs by search values and filter settings
 const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStore>) => void) => {
    set((state) => ({
       filteredJobs: state.jobs.filter((job) => {

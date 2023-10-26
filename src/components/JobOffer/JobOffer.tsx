@@ -1,10 +1,12 @@
 import React from 'react';
 import { useGetOfferById } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
+import style from './JobOffer.module.scss';
 
 const JobOffer: React.FC = () => {
    const { offer, currentOfferId } = useJobsStore();
    const { isError, isPending } = useGetOfferById(currentOfferId);
+   console.log(offer);
 
    if (isError) {
       return <div>Error occurred while fetching jobs.</div>;
@@ -34,65 +36,64 @@ const JobOffer: React.FC = () => {
                title,
                updatedAt,
                workLocation,
+               _id,
             }) => {
                return (
                   <>
-                     <header>
-                        <img src={image} alt="Offer logo" />
-                        <div>
-                           <h2>{title.toUpperCase()}</h2>
-                           <p>
-                              {technologies.map((technology) => {
-                                 if (technologies.indexOf(technology) < technologies.length - 1) {
-                                    return `${technology.toUpperCase()} *`;
-                                 }
-                              })}
+                     <header className={style.headerContainer} key={_id}>
+                        <img src={image} alt="Offer logo" className={style.logo} />
+                        <div className={style.titleBox}>
+                           <h2 className={style.title}>{title.toUpperCase()}</h2>
+                           <p className={style.technologies}>
+                              {technologies
+                                 .map((technology) => technology.toUpperCase())
+                                 .join(' ・ ')}
                            </p>
                         </div>
                      </header>
-                     <section>
-                        <div>
-                           <h3></h3>
-                           <p></p>
+                     <section className={style.textSection}>
+                        <div className={style.textContainer}>
+                           <h3 className={style.textTitle}>{title}</h3>
+                           <p className={style.description}>{description}</p>
                         </div>
-                        <div>
-                           <div>
-                              <button>
-                                 <a href={offerUrl}>Visit offer</a>
+                        <div className={style.detailsContainer}>
+                           <div className={style.buttonBox}>
+                              <button className={style.btn}>
+                                 <a href={offerUrl}>Visit offer ➔</a>
                               </button>
                            </div>
-                           <div>
-                              <div>
-                                 <p>Added</p>
-                                 <p></p>
+                           <div className={style.infoColumnContainer}>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Added</p>
+                                 <p className={style.infoDescription}></p>
                               </div>
-                              <div>
-                                 <p>Company</p>
-                                 <p>{companyName}</p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Company</p>
+                                 <p className={style.infoDescription}>{companyName}</p>
                               </div>
-                              <div>
-                                 <p>Seniority</p>
-                                 <p>{seniority}</p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Seniority</p>
+                                 <p className={style.infoDescription}>{seniority}</p>
                               </div>
-                              <div>
-                                 <p>Location</p>
-                                 <p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Location</p>
+                                 <p className={style.infoDescription}>
                                     {city}, {country}
                                  </p>
                               </div>
-                              <div>
-                                 <p>Job type</p>
-                                 <p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Job type</p>
+                                 <p className={style.infoDescription}>
                                     {workLocation}, {jobType}
                                  </p>
                               </div>
-                              <div>
-                                 <p>Contract</p>
-                                 <p></p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Contract</p>
+                                 <p className={style.infoDescription}></p>
                               </div>
-                              <div>
-                                 <p>Salary</p>
-                                 <p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Salary</p>
+                                 <p className={style.infoDescription}>
                                     {salaryFrom} – {salaryTo} {currency} netto
                                  </p>
                               </div>

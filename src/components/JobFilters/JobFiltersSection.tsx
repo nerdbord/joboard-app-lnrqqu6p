@@ -4,7 +4,7 @@ import JobFilter from './JobFilter';
 import useJobsStore from '../../store/useJobsStore';
 
 function JobFiltersSection(): React.ReactElement {
-   const { jobType, setJobType, jobSeniority, setJobSeniority } = useJobsStore();
+   const { jobType, setJobType, jobSeniority, setJobSeniority, jobLocation, setJobLocation } = useJobsStore();
 
    const jobFilters = [
     {filterLabel: "Job Type", filterOptions: [
@@ -20,6 +20,11 @@ function JobFiltersSection(): React.ReactElement {
       { keyName: 'midRegular', label: 'Mid/Regular', value: jobSeniority.midRegular, setValue: setJobSeniority },
       { keyName: 'junior', label: 'Junior', value: jobSeniority.junior, setValue: setJobSeniority },
       { keyName: 'intern', label: 'Intern', value: jobSeniority.intern, setValue: setJobSeniority },
+    ]},
+    {filterLabel: "Location", filterOptions: [
+      { keyName: 'remote', label: 'Remote', value: jobLocation.remote, setValue: setJobLocation },
+      { keyName: 'partRemote', label: 'Part-Remote', value: jobLocation.partRemote, setValue: setJobLocation },
+      { keyName: 'onSite', label: 'On-Site', value: jobLocation.onSite, setValue: setJobLocation },
     ]},
   ];
    return (

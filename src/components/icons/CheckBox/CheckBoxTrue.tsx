@@ -17,8 +17,8 @@ function CheckBoxTrue(): React.ReactElement {
                height="19"
                rx="5"
                fill="#9564D4"
-               fill-opacity="0.1"
-               shape-rendering="crispEdges"
+               fillOpacity="0.1"
+               shapeRendering="crispEdges"
             />
             <rect
                x="4.5"
@@ -27,14 +27,14 @@ function CheckBoxTrue(): React.ReactElement {
                height="18"
                rx="4.5"
                stroke="#9564D4"
-               shape-rendering="crispEdges"
+               shapeRendering="crispEdges"
             />
          </g>
          <path
             d="M9 13L12.5 16.5L19 10"
             stroke="#9564D4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
          />
          <defs>
             <filter
@@ -44,9 +44,9 @@ function CheckBoxTrue(): React.ReactElement {
                width="27"
                height="27"
                filterUnits="userSpaceOnUse"
-               color-interpolation-filters="sRGB"
+               colorInterpolationFilters="sRGB"
             >
-               <feFlood flood-opacity="0" result="BackgroundImageFix" />
+               <feFlood floodOpacity="0" result="BackgroundImageFix" />
                <feColorMatrix
                   in="SourceAlpha"
                   type="matrix"

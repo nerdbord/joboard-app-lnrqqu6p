@@ -17,6 +17,12 @@ type JobSeniority = {
    intern: boolean;
 };
 
+type JobLocation = {
+   remote: boolean;
+   partRemote: boolean;
+   onSite: boolean;
+};
+
 interface JobsStore {
    jobs: IJobs;
    filteredJobs: IJobs;
@@ -24,6 +30,7 @@ interface JobsStore {
    searchLocation: string;
    jobType: JobType;
    jobSeniority: JobSeniority;
+   jobLocation: JobLocation;
 
    setJobs: (value: IJobs) => void;
    clearSearch: () => void;
@@ -31,6 +38,7 @@ interface JobsStore {
    setSearchLocation: (value: string) => void;
    setJobType: (key: keyof JobType, value: boolean) => void;
    setJobSeniority: (key: keyof JobSeniority, value: boolean) => void;
+   setJobLocation: (key: keyof JobLocation, value: boolean) => void;
 }
 
 const useJobsStore = create<JobsStore>((set) => ({
@@ -47,6 +55,7 @@ const useJobsStore = create<JobsStore>((set) => ({
       junior: false,
       intern: false,
    },
+   jobLocation: { remote: false, partRemote: false, onSite: false },
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
    clearSearch: () => {
@@ -73,6 +82,12 @@ const useJobsStore = create<JobsStore>((set) => ({
       }));
       setFilteredJobs(set);
    },
+   setJobLocation: (key, value) => {
+      set((state) => ({
+         jobLocation: { ...state.jobLocation, [key]: value },
+      }));
+      setFilteredJobs(set);
+   },
 }));
 
 // Filter jobs by search values and filter settings
@@ -95,7 +110,11 @@ const setFilteredJobs = (set: (state: (prevState: JobsStore) => Partial<JobsStor
                (state.jobSeniority.senior && job.seniority === 'Senior') ||
                (state.jobSeniority.midRegular && job.seniority === 'Mid/Regular') ||
                (state.jobSeniority.junior && job.seniority === 'Junior') ||
-               (state.jobSeniority.intern && job.seniority === 'Intern'))
+               (state.jobSeniority.intern && job.seniority === 'Intern')) &&
+            (!isAnySelected(state.jobLocation) ||
+               (state.jobLocation.remote && job.workLocation === 'Remote') ||
+               (state.jobLocation.partRemote && job.workLocation === 'Part-remote') ||
+               (state.jobLocation.onSite && job.workLocation === 'On-site'))
          );
       }),
    }));

@@ -1,68 +1,109 @@
 .offer {
-   display: flex;
-   flex-direction: row;
-   border: 1px solid #dadada;
-   border-radius: 5px;
-   background-color: #ffffff;
-   padding: 20px;
-   column-gap: 10px;
-   font-family: 'Poppins';
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 20px;
+  column-gap: 10px;
+  font-family: 'Poppins';
 }
 
 .logo {
-   height: 46px;
-   width: 46px;
+  height: 46px;
+  width: 46px;
 }
+
 .title {
-   font-size: 20px;
-   font-weight: 600;
-   color: #212121;
-   line-height: 26px;
-   text-align: left;
+  font-size: 20px;
+  font-weight: 600;
+  color: #212121;
+  line-height: 26px;
+  text-align: left;
 }
 
 .offerData {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.company {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 500;
+  color: #545454;
 }
 
 .offerDetails {
-   display: flex;
-   flex-direction: row;
-   justify-content: flex-start;
-   align-items: center;
-   column-gap: 14px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 14px;
+  align-items: flex-start;
 }
-.company {
-   font-size: 12px;
-   line-height: 12px;
-   font-weight: 500;
-   color: #545454;
-}
-.locationSeniority {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   font-size: 12px;
-   line-height: 12px;
-   font-weight: 400;
-   color: #545454;
-   column-gap: 14px;
-}
+
 .salary {
-   color: #9564d4;
+  display: flex;
+  color: #9564d4;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  align-items: flex-end;
+  white-space: nowrap;
 }
 
 .separator {
-   border-right: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+}
+
+.marginal {
+  border-right: 1px solid #dadada;
 }
 
 .daysElapsed {
-   font-size: 12px;
-   line-height: 12px;
-   font-weight: 400;
-   text-align: right;
-   color: #545454;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  text-align: right;
+  color: #545454;
+}
+
+.colDetails {
+  display: flex;
+  flex-direction: row;
+  gap: inherit;
+}
+
+.colSalaryDays {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  color: #545454;
+  column-gap: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .offer {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  .offerDetails {
+    flex-direction: column;
+    row-gap: 8px;
+  }
+  .marginal {
+    border-right: none;
+  }
 }

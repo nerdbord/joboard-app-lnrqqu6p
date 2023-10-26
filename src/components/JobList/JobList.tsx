@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useGetJobs } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
 import styles from './JobList.module.scss';
-import JobCard from '../JobCard/JobCard';
+import JobCard from "../JobCard/JobCard";
 
 const JobList: React.FC = () => {
    const { isError, isPending, data } = useGetJobs();

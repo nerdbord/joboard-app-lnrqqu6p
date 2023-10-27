@@ -1,6 +1,6 @@
 .container {
-   width: 100%;
-   max-width: 365px;
+   max-width: calc(100vw - 36px);
+   // max-width: 365px;
    position: relative;
 }
 
@@ -30,6 +30,14 @@ input {
 
    &::placeholder {
       opacity: 1;
+   }
+   &:focus {
+      outline: none; 
+    }
+    @media only screen and (max-width: 768px) {
+      width: 100vw;
+      padding: 0;
+      flex-direction: column;
    }
 }
 

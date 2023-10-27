@@ -15,20 +15,22 @@ function SearchSection(): React.ReactElement {
    } = useJobsStore();
    return (
       <section className={styles.container}>
-         <SearchBar
-            zIndex={2}
-            jobs={jobs}
-            searchFor="title"
-            searchValue={searchTitle}
-            setSearchValue={setSearchTitle}
-         />
-         <SearchBar
-            zIndex={1}
-            jobs={jobs}
-            searchFor="city"
-            searchValue={searchLocation}
-            setSearchValue={setSearchLocation}
-         />
+         <div className={styles.searchBarsContainer}>
+            <SearchBar
+               zIndex={2}
+               jobs={jobs}
+               searchFor="title"
+               searchValue={searchTitle}
+               setSearchValue={setSearchTitle}
+            />
+            <SearchBar
+               zIndex={1}
+               jobs={jobs}
+               searchFor="city"
+               searchValue={searchLocation}
+               setSearchValue={setSearchLocation}
+            />
+         </div>
          {filteredJobs && (
             <div className={styles.information}>
                <p>

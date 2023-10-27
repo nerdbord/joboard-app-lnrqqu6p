@@ -1,7 +1,13 @@
 .container {
-   width: 100%;
-   max-width: 877px;
-   background-color: #f8f8f8;
-   padding: 40px;
-   min-height: 100vh;
+
+    width: 100%;
+    max-width: 877px;
+    background-color: #F8F8F8;
+    padding: 40px;
+    min-height: 100vh;
+    @media only screen and (max-width: 768px) {
+        padding: 16px 15px;
+        max-width: 100vw;
+     }
 }
+

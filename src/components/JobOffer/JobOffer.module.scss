@@ -1,5 +1,5 @@
 .container {
-   position: absolute;
+   position: fixed;
    display: flex;
    flex-direction: column;
    top: 40px;
@@ -11,6 +11,7 @@
    background: var(--white);
    border-radius: 5px;
    border: 1px solid var(--gray-light);
+   opacity: 1 !important;
 }
 
 .headerContainer,
@@ -123,4 +124,9 @@
    div:not(:last-child) {
       border-bottom: 1px solid var(--gray-light);
    }
+}
+
+.logo {
+   width: 80px;
+   height: 80px;
 }

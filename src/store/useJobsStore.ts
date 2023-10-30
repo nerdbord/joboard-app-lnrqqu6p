@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { IJobs } from '../services/types';
+import { IJob, IJobs, initialOffer } from '../services/types';
 
 type JobType = {
    fullTime: boolean;
@@ -32,6 +32,9 @@ interface JobsStore {
    jobSeniority: JobSeniority;
    jobLocation: JobLocation;
    jobSalary: number;
+   offer: IJob;
+   currentOfferId: string;
+   isOfferWindowOpen: boolean;
 
    setJobs: (value: IJobs) => void;
    clearSearch: () => void;
@@ -42,6 +45,9 @@ interface JobsStore {
    setJobLocation: (key: keyof JobLocation, value: boolean) => void;
    setJobSalary: (value: number) => void;
    clearFilters: () => void;
+   setOffer: (value: IJob) => void;
+   setCurrentOfferId: (value: string) => void;
+   setIsOfferWindowOper: (value: boolean) => void;
 }
 
 const useJobsStore = create<JobsStore>((set) => ({
@@ -60,6 +66,9 @@ const useJobsStore = create<JobsStore>((set) => ({
    },
    jobLocation: { remote: false, partRemote: false, onSite: false },
    jobSalary: 0,
+   offer: initialOffer,
+   currentOfferId: '',
+   isOfferWindowOpen: false,
 
    setJobs: (value) => set({ jobs: value, filteredJobs: value }),
    clearSearch: () => {
@@ -105,6 +114,9 @@ const useJobsStore = create<JobsStore>((set) => ({
       }));
       setFilteredJobs(set);
    },
+   setOffer: (value) => set({ offer: value }),
+   setCurrentOfferId: (value) => set({ currentOfferId: value }),
+   setIsOfferWindowOper: (value) => set({ isOfferWindowOpen: value }),
 }));
 
 // Filter jobs by search values and filter settings

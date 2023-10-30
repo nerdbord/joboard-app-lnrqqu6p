@@ -5,7 +5,7 @@ import Slider from '../Slider/Slider';
 
 interface Props {
    label: string;
-   options: Array<Option> | {value: number, setValue: (value: number) => void};
+   options: Array<Option> | { value: number; setValue: (value: number) => void };
 }
 
 const JobFilter: React.FC<Props> = ({ label, options }) => {
@@ -19,7 +19,7 @@ const JobFilter: React.FC<Props> = ({ label, options }) => {
                ))}
             </div>
          ) : (
-            <Slider value={options.value} setValue={options.setValue}/>
+            <Slider value={options.value} setValue={options.setValue} />
          )}
       </div>
    );

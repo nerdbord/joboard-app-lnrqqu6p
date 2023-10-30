@@ -16,6 +16,14 @@
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
    -webkit-text-size-adjust: 100%;
+
+   --white: #fff;
+   --black: #000;
+   --gray-light: #dadada;
+   --bg-gray: #f8f8f8;
+   --accent: #552882;
+   --gray-darkest: #212121;
+   --gray-dark: #545454;
 }
 
 * {
@@ -26,9 +34,6 @@ a {
    font-weight: 500;
    color: #646cff;
    text-decoration: inherit;
-}
-a:hover {
-   color: #535bf2;
 }
 
 body {
@@ -42,8 +47,8 @@ body {
 h1 {
    font-size: 27px;
    line-height: 27px;
-   letter-spacing: -1.89px; 
-   font-weight: 700; 
+   letter-spacing: -1.89px;
+   font-weight: 700;
 }
 
 button {
@@ -69,9 +74,6 @@ button:focus-visible {
    :root {
       color: #213547;
       background-color: #ffffff;
-   }
-   a:hover {
-      color: #747bff;
    }
    button {
       background-color: #f9f9f9;

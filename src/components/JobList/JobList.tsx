@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetJobs } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
 import styles from './JobList.module.scss';
-import JobCard from "../JobCard/JobCard";
+import JobCard from '../JobCard/JobCard';
+import JobOffer from '../JobOffer/JobOffer';
+import JobOfferContainer from '../JobOffer/JobOfferContainer';
 
 const JobList: React.FC = () => {
    const { isError, isPending, data } = useGetJobs();
-   const { setJobs, filteredJobs } = useJobsStore();
+   const { setJobs, filteredJobs, isOfferWindowOpen } = useJobsStore();
 
    useEffect(() => {
       data && setJobs(data);
@@ -23,6 +25,11 @@ const JobList: React.FC = () => {
    return (
       <div className={styles.jobOffersList}>
          {filteredJobs && filteredJobs.map((offer) => <JobCard key={offer._id} {...offer} />)}
+         {isOfferWindowOpen && (
+            <JobOfferContainer>
+               <JobOffer />
+            </JobOfferContainer>
+         )}
       </div>
    );
 };

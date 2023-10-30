@@ -1,0 +1,154 @@
+.container {
+   position: fixed;
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+   top: 40px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 1094px;
+   padding: 65px 74px 48px 60px;
+   z-index: 3;
+   background: var(--white);
+   border-radius: 5px;
+   border: 1px solid var(--gray-light);
+}
+
+.headerContainer,
+.textSection,
+.infoBox {
+   display: flex;
+}
+
+.titleBox,
+.detailsContainer,
+.infoColumnContainer {
+   display: flex;
+   flex-direction: column;
+}
+
+.infoColumnContainer,
+.textContainer,
+.buttonBox {
+   background: var(--bg-gray);
+}
+
+.buttonBox {
+   display: grid;
+   place-items: center;
+   height: 67px;
+}
+
+.headerContainer {
+   align-items: center;
+   gap: 24px;
+}
+
+.titleBox {
+   text-align: left;
+}
+
+.btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 252px;
+   height: 34px;
+   background: var(--accent);
+   border-radius: 28px;
+   a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      &:hover {
+         opacity: 0.9;
+         color: var(--white);
+      }
+   }
+}
+
+.textSection {
+   gap: 17px;
+}
+
+.detailsContainer {
+   gap: 18px;
+   width: 312px;
+}
+
+.textContainer {
+   padding: 40px;
+   width: 631px;
+   color: var(--gray-dark);
+   text-align: left;
+}
+
+.textTitle {
+   font-size: 20px;
+   font-weight: 600;
+   letter-spacing: -0.4px;
+   margin-bottom: 20px;
+}
+
+.description {
+   font-size: 14px;
+   font-weight: 500;
+}
+
+.title {
+   font-size: 28px;
+   font-weight: 600;
+   color: var(--black);
+}
+
+.technologies {
+   font-size: 14px;
+   color: var(--gray-dark);
+}
+
+.infoBox {
+   position: relative;
+   align-items: center;
+   justify-content: space-between;
+   width: 252px;
+   &:not(:last-child):after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      width: 100%;
+      height: 1px;
+      background: var(--gray-light);
+   }
+}
+
+.infoTitle {
+   font-size: 12px;
+   font-weight: 600;
+   color: var(--gray-darkest);
+}
+
+.infoDescription {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   font-size: 14px;
+   font-weight: 400;
+   color: var(--gray-dark);
+}
+
+.infoColumnContainer {
+   gap: 38px;
+   padding: 30px;
+}
+
+.logo {
+   width: 80px;
+   height: 80px;
+}
+
+.closeIcon {
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   cursor: pointer;
+}

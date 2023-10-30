@@ -6,7 +6,7 @@ import style from './JobOffer.module.scss';
 const JobOffer: React.FC = () => {
    const { offer, currentOfferId } = useJobsStore();
    const { isError, isPending } = useGetOfferById(currentOfferId);
-   console.log(offer);
+   console.log(offer)
 
    if (isError) {
       return <div>Error occurred while fetching jobs.</div>;
@@ -15,6 +15,17 @@ const JobOffer: React.FC = () => {
    if (isPending) {
       return <div>Loading...</div>;
    }
+
+   const dayInterval = (created : string) => {
+      const creationDate = new Date(created);
+      const nowDate = new Date();
+      const differenceInTime = nowDate.getTime() - creationDate.getTime();
+      const dayInMiliseconds = 1000*60*60*24;
+      const differenceInDays = Math.ceil(differenceInTime / dayInMiliseconds)
+      return differenceInDays > 1 ? differenceInDays + " days ago" : differenceInDays === 1 ? " day ago" : "today"
+   }
+
+   dayInterval("2023-10-28T20:55:57.194Z")
 
    return (
       <>
@@ -65,7 +76,7 @@ const JobOffer: React.FC = () => {
                            <div className={style.infoColumnContainer}>
                               <div className={style.infoBox}>
                                  <p className={style.infoTitle}>Added</p>
-                                 <p className={style.infoDescription}></p>
+                                 <p className={style.infoDescription}>{dayInterval(createdAt)} </p>
                               </div>
                               <div className={style.infoBox}>
                                  <p className={style.infoTitle}>Company</p>

@@ -68,14 +68,14 @@ const JobOffer: React.FC = () => {
                            </p>
                         </div>
                      </header>
-                     <section>
-                        <div>
-                           <h3>{title}</h3>
-                           <p>{description}</p>
+                     <section className={style.textSection}>
+                        <div className={style.textContainer}>
+                           <h3 className={style.textTitle}>{title}</h3>
+                           <p className={style.description}>{description}</p>
                         </div>
-                        <div>
-                           <div>
-                              <button>
+                        <div className={style.detailsContainer}>
+                           <div className={style.buttonBox}>
+                              <button className={style.btn}>
                                  <a href={offerUrl}>Visit offer ➔</a>
                               </button>
                            </div>
@@ -84,13 +84,13 @@ const JobOffer: React.FC = () => {
                                  <p className={style.infoTitle}>Added</p>
                                  <p className={style.infoDescription}>{dayInterval(createdAt)}</p>
                               </div>
-                              <div>
-                                 <p>Company</p>
-                                 <p>{companyName}</p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Company</p>
+                                 <p className={style.infoDescription}>{companyName}</p>
                               </div>
-                              <div>
-                                 <p>Seniority</p>
-                                 <p>{seniority}</p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Seniority</p>
+                                 <p className={style.infoDescription}>{seniority}</p>
                               </div>
                               <div className={style.infoBox}>
                                  <p className={style.infoTitle}>Location</p>
@@ -110,9 +110,9 @@ const JobOffer: React.FC = () => {
                                  <p className={style.infoTitle}>Contract</p>
                                  <p className={style.infoDescription}>{jobType}</p>
                               </div>
-                              <div>
-                                 <p>Salary</p>
-                                 <p>
+                              <div className={style.infoBox}>
+                                 <p className={style.infoTitle}>Salary</p>
+                                 <p className={style.infoDescription}>
                                     {salaryFrom} – {salaryTo} {currency} netto
                                  </p>
                               </div>

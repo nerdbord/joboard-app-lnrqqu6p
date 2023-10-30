@@ -2,6 +2,7 @@
    position: fixed;
    display: flex;
    flex-direction: column;
+   gap: 24px;
    top: 40px;
    left: 50%;
    transform: translateX(-50%);
@@ -11,7 +12,6 @@
    background: var(--white);
    border-radius: 5px;
    border: 1px solid var(--gray-light);
-   opacity: 1 !important;
 }
 
 .headerContainer,
@@ -37,6 +37,15 @@
    display: grid;
    place-items: center;
    height: 67px;
+}
+
+.headerContainer {
+   align-items: center;
+   gap: 24px;
+}
+
+.titleBox{
+   text-align: left;
 }
 
 .btn {
@@ -81,6 +90,7 @@
    font-size: 20px;
    font-weight: 600;
    letter-spacing: -0.4px;
+   margin-bottom: 20px;
 }
 
 .description {
@@ -91,20 +101,27 @@
 .title {
    font-size: 28px;
    font-weight: 600;
-   line-height: 28px;
    color: var(--black);
 }
 
 .technologies {
    font-size: 14px;
-   line-height: 18.2px;
    color: var(--gray-dark);
 }
 
 .infoBox {
+   position: relative;
    align-items: center;
    justify-content: space-between;
    width: 252px;
+   &:not(:last-child):after {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      width: 100%;
+      height: 1px;
+      background: var(--gray-light);
+   }
 }
 
 .infoTitle {
@@ -114,19 +131,28 @@
 }
 
 .infoDescription {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
    font-size: 14px;
    font-weight: 400;
    color: var(--gray-dark);
 }
 
 .infoColumnContainer {
+   gap: 38px;
    padding: 30px;
-   div:not(:last-child) {
-      border-bottom: 1px solid var(--gray-light);
-   }
 }
 
 .logo {
    width: 80px;
    height: 80px;
 }
+
+.closeIcon{
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   cursor: pointer;
+}
+

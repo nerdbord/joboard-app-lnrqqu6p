@@ -44,7 +44,7 @@
    gap: 24px;
 }
 
-.titleBox{
+.titleBox {
    text-align: left;
 }
 
@@ -115,7 +115,7 @@
    justify-content: space-between;
    width: 252px;
    &:not(:last-child):after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: -20px;
       width: 100%;
@@ -149,10 +149,9 @@
    height: 80px;
 }
 
-.closeIcon{
+.closeIcon {
    position: absolute;
    top: 20px;
    right: 20px;
    cursor: pointer;
 }
-

@@ -2,10 +2,10 @@ import React from 'react';
 import { useGetOfferById } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
 import style from './JobOffer.module.scss';
-import closeIcon from "../../assets/close.svg";
+import closeIcon from '../../assets/close.svg';
 
 const JobOffer: React.FC = () => {
-   const { offer, currentOfferId, setIsOfferWindowOper, isOfferWindowOpen  } = useJobsStore();
+   const { offer, currentOfferId, setIsOfferWindowOper, isOfferWindowOpen } = useJobsStore();
    const { isError, isPending } = useGetOfferById(currentOfferId);
    console.log(offer);
 
@@ -18,8 +18,8 @@ const JobOffer: React.FC = () => {
    }
 
    const handleOnCloseClick = () => {
-      setIsOfferWindowOper(!isOfferWindowOpen)
-   }
+      setIsOfferWindowOper(!isOfferWindowOpen);
+   };
 
    const dayInterval = (created: string) => {
       const creationDate = new Date(created);
@@ -119,7 +119,12 @@ const JobOffer: React.FC = () => {
                            </div>
                         </div>
                      </section>
-                     <img src={closeIcon} alt="Close icon" className={style.closeIcon} onClick={handleOnCloseClick}/>
+                     <img
+                        src={closeIcon}
+                        alt="Close icon"
+                        className={style.closeIcon}
+                        onClick={handleOnCloseClick}
+                     />
                   </React.Fragment>
                );
             },

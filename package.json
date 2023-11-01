@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prepare": "husky install",
-    "format": "npx prettier --write **/*.{ts,tsx,scss,css}"
+    "format": "npx prettier --write **/*.{ts,tsx,scss,css}",
+    "test": "vite test"
   },
   "dependencies": {
     "@fontsource/poppins": "^5.0.8",
@@ -17,9 +18,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.60.0",
+    "vitest": "^0.34.6",
     "zustand": "^4.4.3"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/node": "^20.8.6",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",

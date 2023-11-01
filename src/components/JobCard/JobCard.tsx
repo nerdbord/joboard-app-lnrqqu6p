@@ -14,30 +14,33 @@ function JobCard(props: IJob) {
    };
    return (
       <div className={styles.offer} onClick={handleCardOnClick}>
-         <img src={props.image} alt="logo" className={styles.logo} />
-         <div className={styles.offerData}>
-            <div className={styles.title}>{props.title}</div>
-            <div className={styles.offerDetails}>
-               <div className={styles.company}>{props.companyName}</div>
-               <div className={styles.locationSeniority}>
-                  <Separator />
-                  <div>
-                     {props.city}, {props.country}
+         <div className={styles.offerContainer}>
+            <img src={props.image} alt="logo" className={styles.logo} />
+            <div className={styles.offerData}>
+               <div className={styles.title}>{props.title}</div>
+               <div className={styles.detailsContainer}>
+                  <div className={styles.colDetails}>
+                     <div className={styles.company}>{props.companyName}</div>
+                     <Separator />
+                     <div>
+                        {props.city}, {props.country}
+                     </div>
+                     <Marginal />
                   </div>
-                  <Separator />
-                  <div>{props.workLocation}</div>
-                  <Separator />
-                  <div>{props.seniority}</div>
-                  <Separator />
-                  <div className={styles.salary}>
-                     {props.salaryFrom} - {props.salaryTo} {props.currency} net
+                  <div className={styles.colDetails}>
+                     <div>{props.workLocation}</div>
+                     <Separator />
+                     <div>{props.seniority}</div>
+                     <Marginal />
                   </div>
                </div>
             </div>
-            <div className={styles.colSalaryDays}>
-               <div className={styles.salary}>
-                  {props.salaryFrom} - {props.salaryTo} {props.currency} net
-               </div>
+         </div>
+         <div className={styles.salaryDaysContainer}>
+            <div className={styles.salary}>
+               {props.salaryFrom} - {props.salaryTo} {props.currency} net
+            </div>
+            <div className={styles.daysElapsedContainer}>
                <DaysElapsed {...props} />
             </div>
          </div>

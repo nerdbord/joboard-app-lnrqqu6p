@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prepare": "husky install",
-    "format": "npx prettier --write **/*.{ts,tsx,scss,css}"
+    "format": "npx prettier --write **/*.{ts,tsx,scss,css}",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@fontsource/poppins": "^5.0.8",
@@ -20,13 +22,19 @@
     "zustand": "^4.4.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
     "@types/node": "^20.8.6",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
+    "@vitest/ui": "^0.34.6",
+    "happy-dom": "^12.10.3",
     "husky": "^8.0.0",
+    "jsdom": "^22.1.0",
     "prettier": "^2.8.7",
     "typescript": "^5.2.2",
-    "vite": "^4.4.11"
+    "vite": "^4.4.11",
+    "vitest": "^0.34.6"
   }
 }

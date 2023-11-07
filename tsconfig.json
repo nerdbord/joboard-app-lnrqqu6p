@@ -7,8 +7,11 @@
       "esModuleInterop": true,
       "sourceMap": true,
       "jsx": "react",
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
+      "types": ["vitest/globals"]
    },
-   "include": ["src/**/*"],
+   "include": [
+      "src/**/*",
+   ],
    "exclude": ["node_modules", "**/*.spec.ts"]
 }

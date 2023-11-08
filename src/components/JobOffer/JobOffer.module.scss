@@ -1,3 +1,5 @@
+$max-mobile: 768px;
+
 .container {
    position: fixed;
    display: flex;
@@ -12,6 +14,14 @@
    background: var(--white);
    border-radius: 5px;
    border: 1px solid var(--gray-light);
+   @media screen and (max-width: 1120px) {
+      width: 75%;
+   }
+   @media screen and (max-width: $max-mobile) {
+      top: 0;
+      width: 100%;
+      padding: 30px 16px;
+   }
 }
 
 .headerContainer,
@@ -42,6 +52,11 @@
 .headerContainer {
    align-items: center;
    gap: 24px;
+   @media screen and (max-width: $max-mobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+   }
 }
 
 .titleBox {
@@ -56,6 +71,9 @@
    height: 34px;
    background: var(--accent);
    border-radius: 28px;
+   @media screen and (max-width: 1120px) {
+      width: 90%;
+   }
    a {
       font-size: 14px;
       font-weight: 500;
@@ -69,11 +87,24 @@
 
 .textSection {
    gap: 17px;
+   @media screen and (max-width: 1120px) and (min-width: $max-mobile) {
+      > div {
+         width: 50%;
+      }
+   }
+   @media screen and (max-width: $max-mobile) {
+      flex-direction: column-reverse;
+      width: 100%;
+   }
 }
 
 .detailsContainer {
    gap: 18px;
    width: 312px;
+   @media screen and (max-width: $max-mobile) {
+      flex-direction: column-reverse;
+      width: 100%;
+   }
 }
 
 .textContainer {
@@ -81,6 +112,9 @@
    width: 631px;
    color: var(--gray-dark);
    text-align: left;
+   @media screen and (max-width: $max-mobile) {
+      width: 100%;
+   }
 }
 
 .textTitle {
@@ -99,6 +133,9 @@
    font-size: 28px;
    font-weight: 600;
    color: var(--black);
+   @media screen and (max-width: $max-mobile) {
+      font-size: 24px;
+   }
 }
 
 .technologies {
@@ -118,6 +155,12 @@
       width: 100%;
       height: 1px;
       background: var(--gray-light);
+   }
+   @media screen and (max-width: 1120px) {
+      width: 100%;
+      &:last-child > p:nth-child(2) {
+         text-align: end;
+      }
    }
 }
 
@@ -139,11 +182,18 @@
 .infoColumnContainer {
    gap: 38px;
    padding: 30px;
+   @media screen and (max-width: $max-mobile) {
+      width: 100%;
+   }
 }
 
 .logo {
    width: 80px;
    height: 80px;
+   @media screen and (max-width: $max-mobile) {
+      width: 40px;
+      height: 40px;
+   }
 }
 
 .closeIcon {
@@ -151,4 +201,8 @@
    top: 20px;
    right: 20px;
    cursor: pointer;
+   @media screen and (max-width: $max-mobile) {
+      top: 30px;
+      right: 13px;
+   }
 }

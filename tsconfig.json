@@ -11,7 +11,7 @@
       "types": ["vitest/globals"]
    },
    "include": [
-      "src/**/*",
+      "src/**/*", "vite.config.js"
    ],
    "exclude": ["node_modules", "**/*.spec.ts"]
 }

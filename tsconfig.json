@@ -10,8 +10,6 @@
       "resolveJsonModule": true,
       "types": ["vitest/globals"]
    },
-   "include": [
-      "src/**/*", "vite.config.js"
-   ],
+   "include": ["src/**/*", "vite.config.js", "../tests/*" ],
    "exclude": ["node_modules", "**/*.spec.ts"]
 }

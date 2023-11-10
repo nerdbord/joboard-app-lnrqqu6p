@@ -3,7 +3,7 @@ import {cleanup} from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import '@testing-library/jest-dom';
 import { setupServer } from 'msw/node'
-import { mswHandlers } from './testUtils'
+import { mswHandlers } from './utils/queries'
 
 console.log('Start setup.js')
 export const server = setupServer(...mswHandlers)

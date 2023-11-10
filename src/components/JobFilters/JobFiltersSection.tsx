@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './JobFiltersSection.module.scss';
 import JobFilter from './JobFilter';
 import useJobsStore from '../../store/useJobsStore';
+import { IJob } from '../../services/types';
 
 function JobFiltersSection(): React.ReactElement {
    const {
@@ -19,6 +20,7 @@ function JobFiltersSection(): React.ReactElement {
    const jobFilters = [
       {
          filterLabel: 'Job Type',
+         offerKeyName: 'jobType' as keyof IJob,
          filterOptions: [
             {
                keyName: 'fullTime',
@@ -48,6 +50,7 @@ function JobFiltersSection(): React.ReactElement {
       },
       {
          filterLabel: 'Seniority',
+         offerKeyName: 'seniority' as keyof IJob,
          filterOptions: [
             { keyName: 'lead', label: 'Lead', value: jobSeniority.lead, setValue: setJobSeniority },
             {
@@ -84,6 +87,7 @@ function JobFiltersSection(): React.ReactElement {
       },
       {
          filterLabel: 'Location',
+         offerKeyName: 'workLocation' as keyof IJob,
          filterOptions: [
             {
                keyName: 'remote',
@@ -105,7 +109,11 @@ function JobFiltersSection(): React.ReactElement {
             },
          ],
       },
-      { filterLabel: 'Salary (min.)', filterOptions: { value: jobSalary, setValue: setJobSalary } },
+      {
+         filterLabel: 'Salary (min.)',
+         offerKeyName: 'salaryFrom' as keyof IJob,
+         filterOptions: { value: jobSalary, setValue: setJobSalary },
+      },
    ];
    return (
       <section className={styles.container}>
@@ -115,10 +123,14 @@ function JobFiltersSection(): React.ReactElement {
          </div>
 
          <div className={styles.filtersContainer}>
-            {jobFilters.map(({ filterLabel, filterOptions }, idx) => (
+            {jobFilters.map(({ filterLabel, filterOptions, offerKeyName }, idx) => (
                <div key={idx}>
                   <div className={styles.separator} />
-                  <JobFilter label={filterLabel} options={filterOptions} />
+                  <JobFilter
+                     label={filterLabel}
+                     offerKeyName={offerKeyName}
+                     options={filterOptions}
+                  />
                </div>
             ))}
          </div>

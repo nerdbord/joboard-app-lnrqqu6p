@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CheckBox.module.scss';
-import CheckBoxTrue from '../icons/CheckBox/CheckBoxTrue';
-import CheckBoxFalse from '../icons/CheckBox/CheckBoxFalse';
+import CheckBoxTrue from '../../icons/CheckBox/CheckBoxTrue';
+import CheckBoxFalse from '../../icons/CheckBox/CheckBoxFalse';
 
 export type Option = {
    keyName: string;

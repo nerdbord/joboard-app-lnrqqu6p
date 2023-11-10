@@ -4,33 +4,42 @@ import { IJob } from '../../services/types';
 import { useGetOfferById } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
 
-function JobCard(props: IJob) {
-   const { data } = useGetOfferById(props._id);
+interface Props {
+   offer: IJob;
+}
+
+function JobCard({ offer }: Props) {
+   const { data } = useGetOfferById(offer._id);
    const { setOffer, setCurrentOfferId, setIsOfferWindowOper, isOfferWindowOpen } = useJobsStore();
    const handleCardOnClick = () => {
       setOffer(data);
-      setCurrentOfferId(props._id);
+      setCurrentOfferId(offer._id);
       setIsOfferWindowOper(!isOfferWindowOpen);
    };
    return (
-      <div className={styles.offer} onClick={handleCardOnClick}>
+      <div
+         className={styles.offer}
+         onClick={handleCardOnClick}
+         data-testid="offer"
+         data-test-offer={JSON.stringify(offer)}
+      >
          <div className={styles.offerContainer}>
-            <img src={props.image} alt="logo" className={styles.logo} />
+            <img src={offer.image} alt="logo" className={styles.logo} />
             <div className={styles.offerData}>
-               <div className={styles.title}>{props.title}</div>
+               <div className={styles.title}>{offer.title}</div>
                <div className={styles.detailsContainer}>
                   <div className={styles.colDetails}>
-                     <div className={styles.company}>{props.companyName}</div>
+                     <div className={styles.company}>{offer.companyName}</div>
                      <Separator />
                      <div>
-                        {props.city}, {props.country}
+                        {offer.city}, {offer.country}
                      </div>
                      <Marginal />
                   </div>
                   <div className={styles.colDetails}>
-                     <div>{props.workLocation}</div>
+                     <div>{offer.workLocation}</div>
                      <Separator />
-                     <div>{props.seniority}</div>
+                     <div>{offer.seniority}</div>
                      <Marginal />
                   </div>
                </div>
@@ -38,10 +47,10 @@ function JobCard(props: IJob) {
          </div>
          <div className={styles.salaryDaysContainer}>
             <div className={styles.salary}>
-               {props.salaryFrom} - {props.salaryTo} {props.currency} net
+               {offer.salaryFrom} - {offer.salaryTo} {offer.currency} net
             </div>
             <div className={styles.daysElapsedContainer}>
-               <DaysElapsed {...props} />
+               <DaysElapsed createdAt={offer.createdAt} />
             </div>
          </div>
       </div>
@@ -56,8 +65,8 @@ function Marginal() {
    return <div className={styles.marginal}></div>;
 }
 
-function DaysElapsed(props: IJob) {
-   const daysElapsed = countDaysAgo(props.createdAt);
+function DaysElapsed({ createdAt }) {
+   const daysElapsed = countDaysAgo(createdAt);
    switch (daysElapsed) {
       case 0:
          return <div className={styles.daysElapsed}>today</div>;

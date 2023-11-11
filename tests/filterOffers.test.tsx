@@ -78,7 +78,7 @@ describe('Test job offers filters', () => {
       // Randomize filters
       await setRandomFilters();
       const offersAfter = (await getOffersData()).length;
-      expect(offersInit != offersAfter).toBeTruthy;
+      expect(offersInit != offersAfter).toBeTruthy();
 
       // Reset filters and check filters status
       const resetButton = screen.getByTestId('clear-filters');
@@ -87,6 +87,6 @@ describe('Test job offers filters', () => {
 
       // Offers list length should be the same as the initial list length
       const offersReset = (await getOffersData()).length;
-      expect(offersInit === offersReset).toBeTruthy;
+      expect(offersInit === offersReset).toBeTruthy();
    });
 });

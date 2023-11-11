@@ -52,7 +52,7 @@ export const testFilterCheckBoxes = async (name: string) => {
 export const testFilterSlider = async (name: string) => {
    // Get random value between 0 and max slider value
    const maxValue = 160000;
-   const randomValue = Math.floor(Math.random() * (maxValue+1))
+   const randomValue = Math.floor(Math.random() * (maxValue + 1));
 
    // #1 Get container with sliders (by provided type/name)
    const filtersContainer = screen.getByTestId(name);
@@ -72,7 +72,7 @@ export const testFilterSlider = async (name: string) => {
       expect(dataAfter.value).toBe(randomValue);
 
       // Check if offers are correctly filtered
-      expect(await isOfferListFiltered(dataAfter,true)).toBeTruthy(); // true - means slider/number mode checking
+      expect(await isOfferListFiltered(dataAfter, true)).toBeTruthy(); // true - means slider/number mode checking
       // Reset slider to default state
       fireEvent.change(slider, { target: { value: 0 } });
       const dataReset: FilterData = JSON.parse(slider.getAttribute('data-test-option') as string);
@@ -81,7 +81,7 @@ export const testFilterSlider = async (name: string) => {
 };
 
 // Check if offer list is filtered according to setted filter
-const isOfferListFiltered = async (filter: FilterData, slider = false) => {
+const isOfferListFiltered = async (filter: FilterData, slider = false): Promise<boolean> => {
    // Get currently displayed offer list
    const offers = await getOffersData();
    // Loop over offers and check if there are filtered offers
@@ -119,4 +119,73 @@ const isOfferListFiltered = async (filter: FilterData, slider = false) => {
    }
    // Offer list is correctly filtered
    return true;
+};
+
+export const checkIfFiltersAreReseted = async (): Promise<boolean> => {
+   const filters = screen.queryAllByRole('filters-section');
+   for (const filter of filters) {
+      const filterElements = filter.querySelectorAll('[data-testid="filter-option"]');
+      expect(filterElements.length).toBeGreaterThan(0);
+
+      for (const filterElement of filterElements) {
+         // Get single checkbox data: { offerKeyName: offerKeyName, offerOption: label, value: value }
+         const dataBefore: FilterData = JSON.parse(
+            filterElement.getAttribute('data-test-option') as string,
+         );
+         if (typeof dataBefore.value === 'boolean' && dataBefore.value !== false) {
+            return false;
+         }
+         if (typeof dataBefore.value === 'number' && dataBefore.value !== 0) {
+            return false;
+         }
+      }
+   }
+   return true;
+};
+
+export const setRandomFilters = async () => {
+   const filters = screen.queryAllByRole('filters-section');
+   for (const filter of filters) {
+      const filterElements = filter.querySelectorAll('[data-testid="filter-option"]');
+      expect(filterElements.length).toBeGreaterThan(0);
+
+      // randomly change elements
+      for (const filterElement of filterElements) {
+         if (Math.random() < 0.5) {
+            // Get single checkbox data: { offerKeyName: offerKeyName, offerOption: label, value: value }
+            const dataBefore: FilterData = JSON.parse(
+               filterElement.getAttribute('data-test-option') as string,
+            );
+
+            if (typeof dataBefore.value === 'boolean') {
+               // Click on checkbox
+               await userEvent.click(filterElement);
+               // Get data after click and compare it with previous data
+               const dataAfter: FilterData = await JSON.parse(
+                  filterElement.getAttribute('data-test-option') as string,
+               );
+
+               // Data value before and after should be different (false -> true)
+               expect(dataBefore.value !== dataAfter.value).toBeTruthy();
+            } else if (typeof dataBefore.value === 'number') {
+               const maxValue = 160000;
+               const randomValue = Math.floor(Math.random() * (maxValue + 1));
+
+               // Get slider data: { offerKeyName: offerKeyName, offerOption: label, value: value }
+               const dataBefore: FilterData = JSON.parse(
+                  filterElement.getAttribute('data-test-option') as string,
+               );
+               expect(dataBefore.value).toBe(0);
+               // Change value of slider
+               fireEvent.change(filterElement, { target: { value: randomValue } });
+               // Get data after change and compare it with previous data
+               const dataAfter: FilterData = JSON.parse(
+                  filterElement.getAttribute('data-test-option') as string,
+               );
+               // Data value before and after should be different
+               expect(dataAfter.value).toBe(randomValue);
+            }
+         }
+      }
+   }
 };

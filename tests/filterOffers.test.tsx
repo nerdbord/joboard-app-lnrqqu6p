@@ -1,23 +1,17 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { it, expect } from 'vitest';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
 import App from '../src/App';
-import data from './data/offers.json';
-import { testFilterCheckBoxes, getOffersData, testFilterSlider } from './utils/helpers';
-
-const server = setupServer(
-   http.get('https://training.nerdbord.io/api/v1/joboard/offers*', () => {
-      return HttpResponse.json(data);
-   }),
-);
+import userEvent from '@testing-library/user-event';
+import {
+   testFilterCheckBoxes,
+   getOffersData,
+   testFilterSlider,
+   setRandomFilters,
+   checkIfFiltersAreReseted,
+} from './utils/helpers';
 
 describe('Test job offers filters', () => {
-   beforeAll(() => server.listen());
-   afterEach(() => server.resetHandlers());
-   afterAll(() => server.close());
-
    it('Test filtering by job type', async () => {
       render(<App />);
       // Wait for offers to be available
@@ -68,5 +62,31 @@ describe('Test job offers filters', () => {
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
       await testFilterSlider('filter-salary-min');
+   });
+
+   it('Test resetting filters', async () => {
+      render(<App />);
+      // Wait for offers to be available
+      await waitFor(() => {
+         expect(screen.getByTestId('jobs-container')).toBeTruthy();
+      });
+
+      // Check if offers are displayed
+      const offersInit = (await getOffersData()).length;
+      expect(offersInit).toBeGreaterThan(0);
+
+      // Randomize filters
+      await setRandomFilters();
+      const offersAfter = (await getOffersData()).length;
+      expect(offersInit != offersAfter).toBeTruthy;
+
+      // Reset filters and check filters status
+      const resetButton = screen.getByTestId('clear-filters');
+      await userEvent.click(resetButton);
+      expect(await checkIfFiltersAreReseted()).toBeTruthy();
+
+      // Offers list length should be the same as the initial list length
+      const offersReset = (await getOffersData()).length;
+      expect(offersInit === offersReset).toBeTruthy;
    });
 });

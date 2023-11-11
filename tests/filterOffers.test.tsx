@@ -5,7 +5,7 @@ import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import App from '../src/App';
 import data from './data/offers.json';
-import { testFilterCheckBoxes, getOffersData } from './utils/helpers';
+import { testFilterCheckBoxes, getOffersData, testFilterSlider } from './utils/helpers';
 
 const server = setupServer(
    http.get('https://training.nerdbord.io/api/v1/joboard/offers*', () => {
@@ -22,7 +22,7 @@ describe('Test job offers filters', () => {
       render(<App />);
       // Wait for offers to be available
       await waitFor(() => {
-         expect(screen.getByTestId('jobs-container')).toBeInTheDocument();
+         expect(screen.getByTestId('jobs-container')).toBeTruthy();
       });
 
       // Check if offers are displayed
@@ -35,7 +35,7 @@ describe('Test job offers filters', () => {
       render(<App />);
       // Wait for offers to be available
       await waitFor(() => {
-         expect(screen.getByTestId('jobs-container')).toBeInTheDocument();
+         expect(screen.getByTestId('jobs-container')).toBeTruthy();
       });
 
       // Check if offers are displayed
@@ -48,12 +48,25 @@ describe('Test job offers filters', () => {
       render(<App />);
       // Wait for offers to be available
       await waitFor(() => {
-         expect(screen.getByTestId('jobs-container')).toBeInTheDocument();
+         expect(screen.getByTestId('jobs-container')).toBeTruthy();
       });
 
       // Check if offers are displayed
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
       await testFilterCheckBoxes('filter-location');
+   });
+
+   it('Test filtering by salary', async () => {
+      render(<App />);
+      // Wait for offers to be available
+      await waitFor(() => {
+         expect(screen.getByTestId('jobs-container')).toBeTruthy();
+      });
+
+      // Check if offers are displayed
+      expect((await getOffersData()).length).toBeGreaterThan(0);
+      // Test filters functionality
+      await testFilterSlider('filter-salary-min');
    });
 });

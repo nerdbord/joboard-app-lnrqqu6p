@@ -2,14 +2,8 @@ import React from 'react';
 import styles from './CheckBox.module.scss';
 import CheckBoxTrue from '../../icons/CheckBox/CheckBoxTrue';
 import CheckBoxFalse from '../../icons/CheckBox/CheckBoxFalse';
-import { IJob } from '../../../services/types';
-
-export type Option = {
-   keyName: string;
-   label: string;
-   value: boolean;
-   setValue: (keyName: string, value: boolean) => void;
-};
+import type { IJob } from '../../../services/types';
+import type { Option } from '../JobFilter';
 
 interface Props {
    option: Option;
@@ -26,7 +20,11 @@ const CheckBox: React.FC<Props> = ({ option, offerKeyName }) => {
          className={styles.container}
          onClick={updateValue}
          data-testid="filter-option"
-         data-test-option={JSON.stringify({ offerKeyName: offerKeyName, offerOption: label, value: value })}
+         data-test-option={JSON.stringify({
+            offerKeyName: offerKeyName,
+            offerOption: label,
+            value: value,
+         })}
       >
          <div className={styles.icon}>{value ? <CheckBoxTrue /> : <CheckBoxFalse />}</div>
          <span>{label}</span>

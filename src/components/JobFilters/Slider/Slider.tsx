@@ -1,12 +1,15 @@
 import React, { ChangeEvent } from 'react';
 import styles from './Slider.module.scss';
+import { IJob } from '../../../services/types';
 
 interface Props {
    value: number;
    setValue: (value: number) => void;
+   offerKeyName: keyof IJob;
+   label: string;
 }
 
-const Slider: React.FC<Props> = ({ value, setValue }) => {
+const Slider: React.FC<Props> = ({ value, setValue, offerKeyName, label }) => {
    const maxValue = 160000;
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       setValue(parseInt(e.target.value, 10));
@@ -23,6 +26,12 @@ const Slider: React.FC<Props> = ({ value, setValue }) => {
             className={styles.sliderInput}
             value={value}
             onChange={handleInputChange}
+            data-testid="filter-option"
+            data-test-option={JSON.stringify({
+               offerKeyName: offerKeyName,
+               offerOption: label,
+               value: value,
+            })}
          />
          <div
             className={styles.sliderLabel}

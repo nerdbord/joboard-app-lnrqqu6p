@@ -25,6 +25,7 @@ const JobFilter: React.FC<Props> = ({ label, offerKeyName, options }) => {
             .replace(/[^\w\s]/gi, '')
             .replace(/\s+/g, '-')
             .toLowerCase()}`}
+         role="filters-section"
       >
          <span className={styles.title}>{label}</span>
          {Array.isArray(options) ? (

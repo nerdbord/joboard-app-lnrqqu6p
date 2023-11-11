@@ -49,6 +49,7 @@ export const testFilterCheckBoxes = async (name: string) => {
    }
 };
 
+// Test filters functionality - sliders
 export const testFilterSlider = async (name: string) => {
    // Get random value between 0 and max slider value
    const maxValue = 160000;
@@ -61,7 +62,7 @@ export const testFilterSlider = async (name: string) => {
    expect(slider).not.toBeNull();
 
    if (slider) {
-      // Get slider data: { offerKeyName: offerKeyName, offerOption: label, value: value }
+      // Get slider data
       const dataBefore: FilterData = JSON.parse(slider.getAttribute('data-test-option') as string);
       expect(dataBefore.value).toBe(0);
       // Change value of slider
@@ -72,7 +73,7 @@ export const testFilterSlider = async (name: string) => {
       expect(dataAfter.value).toBe(randomValue);
 
       // Check if offers are correctly filtered
-      expect(await isOfferListFiltered(dataAfter, true)).toBeTruthy(); // true - means slider/number mode checking
+      expect(await isOfferListFiltered(dataAfter)).toBeTruthy();
       // Reset slider to default state
       fireEvent.change(slider, { target: { value: 0 } });
       const dataReset: FilterData = JSON.parse(slider.getAttribute('data-test-option') as string);
@@ -81,13 +82,13 @@ export const testFilterSlider = async (name: string) => {
 };
 
 // Check if offer list is filtered according to setted filter
-const isOfferListFiltered = async (filter: FilterData, slider = false): Promise<boolean> => {
+const isOfferListFiltered = async (filter: FilterData): Promise<boolean> => {
    // Get currently displayed offer list
    const offers = await getOffersData();
    // Loop over offers and check if there are filtered offers
    if (offers.length > 0) {
       for (const offer of offers) {
-         if (slider) {
+         if (typeof offer[filter.offerKeyName] === 'number') {
             // Compare number values
             if (filter.offerOption.includes('-min')) {
                // Slider setted minimum value
@@ -102,7 +103,7 @@ const isOfferListFiltered = async (filter: FilterData, slider = false): Promise<
                   return false;
                }
             }
-         } else {
+         } else if (typeof offer[filter.offerKeyName] === 'string') {
             // When checkbox is checked then compare offer data with setted to filter
             //  (eg. When "Job Type" filter checkbox eg. "Contract" is checked then
             //      offer.jobType should be equal to Contract, and only that offers should be displayed )
@@ -128,13 +129,15 @@ export const checkIfFiltersAreReseted = async (): Promise<boolean> => {
       expect(filterElements.length).toBeGreaterThan(0);
 
       for (const filterElement of filterElements) {
-         // Get single checkbox data: { offerKeyName: offerKeyName, offerOption: label, value: value }
+         // Get single checkbox data
          const dataBefore: FilterData = JSON.parse(
             filterElement.getAttribute('data-test-option') as string,
          );
+         // Each [boolean] filter element should set to false
          if (typeof dataBefore.value === 'boolean' && dataBefore.value !== false) {
             return false;
          }
+         // Each [number] filter element should set to 0
          if (typeof dataBefore.value === 'number' && dataBefore.value !== 0) {
             return false;
          }
@@ -152,7 +155,7 @@ export const setRandomFilters = async () => {
       // randomly change elements
       for (const filterElement of filterElements) {
          if (Math.random() < 0.5) {
-            // Get single checkbox data: { offerKeyName: offerKeyName, offerOption: label, value: value }
+            // Get single checkbox data
             const dataBefore: FilterData = JSON.parse(
                filterElement.getAttribute('data-test-option') as string,
             );
@@ -171,7 +174,7 @@ export const setRandomFilters = async () => {
                const maxValue = 160000;
                const randomValue = Math.floor(Math.random() * (maxValue + 1));
 
-               // Get slider data: { offerKeyName: offerKeyName, offerOption: label, value: value }
+               // Get slider data
                const dataBefore: FilterData = JSON.parse(
                   filterElement.getAttribute('data-test-option') as string,
                );

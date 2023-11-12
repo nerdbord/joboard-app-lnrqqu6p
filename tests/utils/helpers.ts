@@ -82,6 +82,38 @@ export const testFilterSlider = async (name: string) => {
    }
 };
 
+export const testFilterTextInput = async (name: string) => {
+   const textInput = screen.getByTestId(`search-${name}`) as HTMLInputElement;
+   const dataBefore: FilterData = JSON.parse(textInput.getAttribute('data-test-option') as string);
+   const valueBefore = textInput.value;
+   // Init value of text input should be empty string
+   expect(valueBefore).toBe('');
+   expect(dataBefore.value).toBe('');
+
+   // Click on text input and type sth
+   // (eg. for location "ne" should display offers in Sydney and New York)
+   // (eg. for job title "ne" should display offers like "Software Engineer" "Business Analyst" etc.)
+   await userEvent.click(textInput);
+   const testText = 'ne';
+   await userEvent.keyboard(testText);
+
+   // Check if input value is equal to provided value
+   const dataAfter: FilterData = JSON.parse(textInput.getAttribute('data-test-option') as string);
+   const valueAfter = textInput.value;
+   expect(valueAfter).toBe(testText);
+   expect(dataAfter.value).toBe(testText);
+
+   // Check if offers are correctly filtered
+   expect(await isOfferListFiltered(dataAfter)).toBeTruthy();
+
+   // Set the text input value to an empty string
+   await userEvent.clear(textInput);
+   // Verify if the value is now an empty string
+   const dataReset: FilterData = JSON.parse(textInput.getAttribute('data-test-option') as string);
+   expect(textInput.value).toBe('');
+   expect(dataReset.value).toBe('');
+};
+
 // Check if offer list is filtered according to setted filter
 const isOfferListFiltered = async (filter: FilterData): Promise<boolean> => {
    // Get currently displayed offer list
@@ -89,22 +121,25 @@ const isOfferListFiltered = async (filter: FilterData): Promise<boolean> => {
    // Loop over offers and check if there are filtered offers
    if (offers.length > 0) {
       for (const offer of offers) {
-         if (typeof offer[filter.offerKeyName] === 'number') {
+         if (typeof offer[filter.offerKeyName] === 'number' && typeof filter.value === 'number') {
             // Compare number values
             if (filter.offerOption.includes('-min')) {
                // Slider setted minimum value
-               if (offer[filter.offerKeyName] < filter.value) {
+               if ((offer[filter.offerKeyName] as number) < filter.value) {
                   // When salary of job offer is less than minimum setted value then array is incorrectly filtered
                   return false;
                }
             } else if (filter.offerOption.includes('-max')) {
                // Slider setted maximum value(currently there is no one in app)
-               if (offer[filter.offerKeyName] > filter.value) {
+               if ((offer[filter.offerKeyName] as number) > filter.value) {
                   // When salary of job offer is greater than maximum setted value then array is incorrectly filtered
                   return false;
                }
             }
-         } else if (typeof offer[filter.offerKeyName] === 'string') {
+         } else if (
+            typeof offer[filter.offerKeyName] === 'string' &&
+            typeof filter.value === 'boolean'
+         ) {
             // When checkbox is checked then compare offer data with setted to filter
             //  (eg. When "Job Type" filter checkbox eg. "Contract" is checked then
             //      offer.jobType should be equal to Contract, and only that offers should be displayed )
@@ -112,6 +147,20 @@ const isOfferListFiltered = async (filter: FilterData): Promise<boolean> => {
                filter.value &&
                (offer[filter.offerKeyName] as string).toLowerCase() !==
                   filter.offerOption.toLowerCase()
+            ) {
+               // Values doesn't match, offer list is incorrectly filtered
+               return false;
+            }
+         } else if (
+            typeof offer[filter.offerKeyName] === 'string' &&
+            typeof filter.value === 'string'
+         ) {
+            // Check input inputs agains proper filtering.
+            // Offerlist should display only that offers which includes provided input text(job title/location)
+            if (
+               !(offer[filter.offerKeyName] as string)
+                  .toLowerCase()
+                  .includes((filter.value as string).toLowerCase())
             ) {
                // Values doesn't match, offer list is incorrectly filtered
                return false;

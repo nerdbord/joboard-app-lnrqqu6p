@@ -9,10 +9,11 @@ import {
    testFilterSlider,
    setRandomFilters,
    checkIfFiltersAreReseted,
+   testFilterTextInput,
 } from './utils/helpers';
 
 describe('Test job offers filters', () => {
-   it('Test filtering by job type', async () => {
+   it('Test filtering by job type (checkbox)', async () => {
       render(<App />);
       // Wait for offers to be available
       await waitFor(() => {
@@ -25,7 +26,7 @@ describe('Test job offers filters', () => {
       await testFilterCheckBoxes('filter-job-type');
    });
 
-   it('Test filtering by seniority', async () => {
+   it('Test filtering by seniority (checkbox)', async () => {
       render(<App />);
       // Wait for offers to be available
       await waitFor(() => {
@@ -38,7 +39,7 @@ describe('Test job offers filters', () => {
       await testFilterCheckBoxes('filter-seniority');
    });
 
-   it('Test filtering by location', async () => {
+   it('Test filtering by location (checkbox)', async () => {
       render(<App />);
       // Wait for offers to be available
       await waitFor(() => {
@@ -51,7 +52,33 @@ describe('Test job offers filters', () => {
       await testFilterCheckBoxes('filter-location');
    });
 
-   it('Test filtering by salary', async () => {
+   it('Test filtering by location (text input)', async () => {
+      render(<App />);
+      // Wait for offers to be available
+      await waitFor(() => {
+         expect(screen.getByTestId('jobs-container')).toBeTruthy();
+      });
+
+      // Check if offers are displayed
+      expect((await getOffersData()).length).toBeGreaterThan(0);
+      // Test filters functionality
+      await testFilterTextInput('city');
+   });
+
+   it('Test filtering by job title (text input)', async () => {
+      render(<App />);
+      // Wait for offers to be available
+      await waitFor(() => {
+         expect(screen.getByTestId('jobs-container')).toBeTruthy();
+      });
+
+      // Check if offers are displayed
+      expect((await getOffersData()).length).toBeGreaterThan(0);
+      // Test filters functionality
+      await testFilterTextInput('title');
+   });
+
+   it('Test filtering by salary (slider)', async () => {
       render(<App />);
       // Wait for offers to be available
       await waitFor(() => {

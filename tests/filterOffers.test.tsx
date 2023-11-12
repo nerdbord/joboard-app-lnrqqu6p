@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { it, expect } from 'vitest';
+import { it, expect, describe } from 'vitest';
 import App from '../src/App';
 import userEvent from '@testing-library/user-event';
 import {

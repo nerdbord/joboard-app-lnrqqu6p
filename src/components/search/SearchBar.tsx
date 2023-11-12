@@ -56,6 +56,12 @@ export const SearchByJobTitle: React.FC<Props> = ({
                onFocus={() => setInputFocused(true)}
                onBlur={handleBlurInput}
                placeholder={searchFor === 'title' ? 'Search for' : 'Search location'}
+               data-testid={`search-${searchFor}`}
+               data-test-option={JSON.stringify({
+                  offerKeyName: searchFor,
+                  offerOption: '',
+                  value: searchValue,
+               })}
             />
             <div className={styles.icon}>
                {searchFor === 'city' ? <LocationIcon /> : <LoupeIcon />}

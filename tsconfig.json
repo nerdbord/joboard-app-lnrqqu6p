@@ -8,10 +8,8 @@
       "sourceMap": true,
       "jsx": "react",
       "resolveJsonModule": true,
-      "types": ["vitest/globals"]
+      "types": ["jest"]
    },
-   "include": [
-      "src/**/*", "vite.config.js"
-   ],
+   "include": ["src/**/*", "vite.config.js"],
    "exclude": ["node_modules", "**/*.spec.ts"]
 }

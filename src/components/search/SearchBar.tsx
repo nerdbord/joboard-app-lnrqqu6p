@@ -47,7 +47,7 @@ export const SearchByJobTitle: React.FC<Props> = ({
    };
    return (
       <div className={styles.container} style={{ zIndex: zIndex }}>
-         <div className={styles.searchFieldContainer}>
+         <div className={styles.searchFieldContainer} data-testid="filter-search-text">
             <input
                className={styles.searchInput}
                type="text"
@@ -56,12 +56,7 @@ export const SearchByJobTitle: React.FC<Props> = ({
                onFocus={() => setInputFocused(true)}
                onBlur={handleBlurInput}
                placeholder={searchFor === 'title' ? 'Search for' : 'Search location'}
-               data-testid={`search-${searchFor}`}
-               data-test-option={JSON.stringify({
-                  offerKeyName: searchFor,
-                  offerOption: '',
-                  value: searchValue,
-               })}
+               data-testid={searchFor}
             />
             <div className={styles.icon}>
                {searchFor === 'city' ? <LocationIcon /> : <LoupeIcon />}

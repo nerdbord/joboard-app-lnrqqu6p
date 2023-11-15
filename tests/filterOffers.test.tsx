@@ -4,12 +4,12 @@ import { it, expect, describe } from 'vitest';
 import App from '../src/App';
 import userEvent from '@testing-library/user-event';
 import {
-   testFilterCheckBoxes,
    getOffersData,
-   testFilterSlider,
+   expectCheckboxFilterToFilterOffers,
+   expectSliderFilterToFilterOffers,
    setRandomFilters,
    checkIfFiltersAreReseted,
-   testFilterTextInput,
+   expectTextSearchFilterToFilterOffers,
 } from './utils/helpers';
 
 describe('Test job offers filters', () => {
@@ -23,7 +23,7 @@ describe('Test job offers filters', () => {
       // Check if offers are displayed
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
-      await testFilterCheckBoxes('filter-job-type');
+      await expectCheckboxFilterToFilterOffers('jobType');
    });
 
    it('Test filtering by seniority (checkbox)', async () => {
@@ -36,7 +36,7 @@ describe('Test job offers filters', () => {
       // Check if offers are displayed
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
-      await testFilterCheckBoxes('filter-seniority');
+      await expectCheckboxFilterToFilterOffers('seniority');
    });
 
    it('Test filtering by location (checkbox)', async () => {
@@ -49,7 +49,7 @@ describe('Test job offers filters', () => {
       // Check if offers are displayed
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
-      await testFilterCheckBoxes('filter-location');
+      await expectCheckboxFilterToFilterOffers('workLocation');
    });
 
    it('Test filtering by location (text input)', async () => {
@@ -62,7 +62,7 @@ describe('Test job offers filters', () => {
       // Check if offers are displayed
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
-      await testFilterTextInput('city');
+      await expectTextSearchFilterToFilterOffers('city');
    });
 
    it('Test filtering by job title (text input)', async () => {
@@ -75,7 +75,7 @@ describe('Test job offers filters', () => {
       // Check if offers are displayed
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
-      await testFilterTextInput('title');
+      await expectTextSearchFilterToFilterOffers('title');
    });
 
    it('Test filtering by salary (slider)', async () => {
@@ -88,7 +88,7 @@ describe('Test job offers filters', () => {
       // Check if offers are displayed
       expect((await getOffersData()).length).toBeGreaterThan(0);
       // Test filters functionality
-      await testFilterSlider('filter-salary-min');
+      await expectSliderFilterToFilterOffers('salaryFrom');
    });
 
    it('Test resetting filters', async () => {

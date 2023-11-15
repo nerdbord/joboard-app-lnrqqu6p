@@ -4,6 +4,23 @@ import JobFilter from './JobFilter';
 import useJobsStore from '../../store/useJobsStore';
 import { IJob } from '../../services/types';
 
+export interface FilterOptionCheckbox {
+   keyName: string;
+   label: string;
+   value: boolean | number;
+   setValue: (keyName: string, value: boolean | number) => void;
+}
+export interface FilterOptionSlider {
+   value: number;
+   setValue: (value: number) => void;
+}
+
+export interface JobFilterType {
+   filterLabel: string;
+   offerKeyName: keyof IJob;
+   options: Array<FilterOptionCheckbox> | FilterOptionSlider;
+}
+
 function JobFiltersSection(): React.ReactElement {
    const {
       jobType,
@@ -17,11 +34,11 @@ function JobFiltersSection(): React.ReactElement {
       clearFilters,
    } = useJobsStore();
 
-   const jobFilters = [
+   const jobFilters: Array<JobFilterType> = [
       {
          filterLabel: 'Job Type',
-         offerKeyName: 'jobType' as keyof IJob,
-         filterOptions: [
+         offerKeyName: 'jobType',
+         options: [
             {
                keyName: 'fullTime',
                label: 'Full-time',
@@ -50,8 +67,8 @@ function JobFiltersSection(): React.ReactElement {
       },
       {
          filterLabel: 'Seniority',
-         offerKeyName: 'seniority' as keyof IJob,
-         filterOptions: [
+         offerKeyName: 'seniority',
+         options: [
             { keyName: 'lead', label: 'Lead', value: jobSeniority.lead, setValue: setJobSeniority },
             {
                keyName: 'expert',
@@ -87,8 +104,8 @@ function JobFiltersSection(): React.ReactElement {
       },
       {
          filterLabel: 'Location',
-         offerKeyName: 'workLocation' as keyof IJob,
-         filterOptions: [
+         offerKeyName: 'workLocation',
+         options: [
             {
                keyName: 'remote',
                label: 'Remote',
@@ -111,26 +128,24 @@ function JobFiltersSection(): React.ReactElement {
       },
       {
          filterLabel: 'Salary (min.)',
-         offerKeyName: 'salaryFrom' as keyof IJob,
-         filterOptions: { value: jobSalary, setValue: setJobSalary },
+         offerKeyName: 'salaryFrom',
+         options: { value: jobSalary, setValue: setJobSalary },
       },
    ];
    return (
       <section className={styles.container}>
          <div className={styles.header}>
             <p>Filter offers</p>
-            <span onClick={clearFilters} data-testid="clear-filters">Clear filters</span>
+            <span onClick={clearFilters} data-testid="clear-filters">
+               Clear filters
+            </span>
          </div>
 
          <div className={styles.filtersContainer}>
-            {jobFilters.map(({ filterLabel, filterOptions, offerKeyName }, idx) => (
+            {jobFilters.map((filter, idx) => (
                <div key={idx}>
                   <div className={styles.separator} />
-                  <JobFilter
-                     label={filterLabel}
-                     offerKeyName={offerKeyName}
-                     options={filterOptions}
-                  />
+                  <JobFilter filter={filter} />
                </div>
             ))}
          </div>

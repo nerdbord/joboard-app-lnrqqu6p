@@ -18,7 +18,7 @@ export const ContainerFilters = (): React.ReactElement => {
             <h1>👾 JO-BOARD</h1>
             {isMobile && (
                <button
-                  className={`${styles.button} ${showFilters && styles.buttonClose}`}
+                  className={`${styles.button} ${showFilters ? styles.buttonClose : ''}`}
                   onClick={() => setShowFilters(!showFilters)}
                >
                   {showFilters ? 'Close' : 'Filter offers'}

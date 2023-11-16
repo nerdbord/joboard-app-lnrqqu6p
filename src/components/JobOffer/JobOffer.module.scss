@@ -1,26 +1,30 @@
 $max-mobile: 768px;
 
 .container {
-   position: fixed;
    display: flex;
+   position: relative;
    flex-direction: column;
    gap: 24px;
    top: 40px;
    left: 50%;
    transform: translateX(-50%);
    width: 1094px;
+   height: fit-content;
    padding: 65px 74px 48px 60px;
-   z-index: 3;
+   margin-bottom: 40px;
    background: var(--white);
    border-radius: 5px;
    border: 1px solid var(--gray-light);
+
    @media screen and (max-width: 1120px) {
       width: 75%;
    }
+
    @media screen and (max-width: $max-mobile) {
       top: 0;
       width: 100%;
       padding: 30px 16px;
+      margin-bottom: 0px;
    }
 }
 
@@ -52,6 +56,7 @@ $max-mobile: 768px;
 .headerContainer {
    align-items: center;
    gap: 24px;
+
    @media screen and (max-width: $max-mobile) {
       flex-direction: column;
       align-items: flex-start;
@@ -71,13 +76,16 @@ $max-mobile: 768px;
    height: 34px;
    background: var(--accent);
    border-radius: 28px;
+
    @media screen and (max-width: 1120px) {
       width: 90%;
    }
+
    a {
       font-size: 14px;
       font-weight: 500;
       color: var(--white);
+
       &:hover {
          opacity: 0.9;
          color: var(--white);
@@ -87,11 +95,13 @@ $max-mobile: 768px;
 
 .textSection {
    gap: 17px;
+
    @media screen and (max-width: 1120px) and (min-width: $max-mobile) {
-      > div {
+      >div {
          width: 50%;
       }
    }
+
    @media screen and (max-width: $max-mobile) {
       flex-direction: column-reverse;
       width: 100%;
@@ -101,6 +111,7 @@ $max-mobile: 768px;
 .detailsContainer {
    gap: 18px;
    width: 312px;
+
    @media screen and (max-width: $max-mobile) {
       flex-direction: column-reverse;
       width: 100%;
@@ -112,6 +123,7 @@ $max-mobile: 768px;
    width: 631px;
    color: var(--gray-dark);
    text-align: left;
+
    @media screen and (max-width: $max-mobile) {
       width: 100%;
    }
@@ -133,6 +145,7 @@ $max-mobile: 768px;
    font-size: 28px;
    font-weight: 600;
    color: var(--black);
+
    @media screen and (max-width: $max-mobile) {
       font-size: 24px;
    }
@@ -148,6 +161,7 @@ $max-mobile: 768px;
    align-items: center;
    justify-content: space-between;
    width: 252px;
+
    &:not(:last-child):after {
       content: '';
       position: absolute;
@@ -156,9 +170,11 @@ $max-mobile: 768px;
       height: 1px;
       background: var(--gray-light);
    }
+
    @media screen and (max-width: 1120px) {
       width: 100%;
-      &:last-child > p:nth-child(2) {
+
+      &:last-child>p:nth-child(2) {
          text-align: end;
       }
    }
@@ -182,6 +198,7 @@ $max-mobile: 768px;
 .infoColumnContainer {
    gap: 38px;
    padding: 30px;
+
    @media screen and (max-width: $max-mobile) {
       width: 100%;
    }
@@ -190,6 +207,7 @@ $max-mobile: 768px;
 .logo {
    width: 80px;
    height: 80px;
+
    @media screen and (max-width: $max-mobile) {
       width: 40px;
       height: 40px;
@@ -201,6 +219,7 @@ $max-mobile: 768px;
    top: 20px;
    right: 20px;
    cursor: pointer;
+
    @media screen and (max-width: $max-mobile) {
       top: 30px;
       right: 13px;

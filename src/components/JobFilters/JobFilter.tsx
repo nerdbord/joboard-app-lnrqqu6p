@@ -1,17 +1,18 @@
 import React from 'react';
 import styles from './JobFilter.module.scss';
-import CheckBox, { Option } from '../CheckBox/CheckBox';
-import Slider from '../Slider/Slider';
+import CheckBox from './CheckBox/CheckBox';
+import Slider from './Slider/Slider';
+import { JobFilterType } from './JobFiltersSection';
 
 interface Props {
-   label: string;
-   options: Array<Option> | { value: number; setValue: (value: number) => void };
+   filter: JobFilterType;
 }
 
-const JobFilter: React.FC<Props> = ({ label, options }) => {
+const JobFilter: React.FC<Props> = ({ filter }) => {
+   const { filterLabel, offerKeyName, options } = filter;
    return (
-      <div className={styles.container}>
-         <span className={styles.title}>{label}</span>
+      <div className={styles.container} data-testid={offerKeyName} role="jobfilters-section">
+         <span className={styles.title}>{filterLabel}</span>
          {Array.isArray(options) ? (
             <div className={styles.optionsContainer}>
                {options.map((option, idx) => (
@@ -19,7 +20,7 @@ const JobFilter: React.FC<Props> = ({ label, options }) => {
                ))}
             </div>
          ) : (
-            <Slider value={options.value} setValue={options.setValue} />
+            <Slider option={options} />
          )}
       </div>
    );

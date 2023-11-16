@@ -2,6 +2,24 @@ import React from 'react';
 import styles from './JobFiltersSection.module.scss';
 import JobFilter from './JobFilter';
 import useJobsStore from '../../store/useJobsStore';
+import { IJob } from '../../services/types';
+
+export interface FilterOptionCheckbox {
+   keyName: string;
+   label: string;
+   value: boolean | number;
+   setValue: (keyName: string, value: boolean | number) => void;
+}
+export interface FilterOptionSlider {
+   value: number;
+   setValue: (value: number) => void;
+}
+
+export interface JobFilterType {
+   filterLabel: string;
+   offerKeyName: keyof IJob;
+   options: Array<FilterOptionCheckbox> | FilterOptionSlider;
+}
 
 function JobFiltersSection(): React.ReactElement {
    const {
@@ -16,10 +34,11 @@ function JobFiltersSection(): React.ReactElement {
       clearFilters,
    } = useJobsStore();
 
-   const jobFilters = [
+   const jobFilters: Array<JobFilterType> = [
       {
          filterLabel: 'Job Type',
-         filterOptions: [
+         offerKeyName: 'jobType',
+         options: [
             {
                keyName: 'fullTime',
                label: 'Full-time',
@@ -48,7 +67,8 @@ function JobFiltersSection(): React.ReactElement {
       },
       {
          filterLabel: 'Seniority',
-         filterOptions: [
+         offerKeyName: 'seniority',
+         options: [
             { keyName: 'lead', label: 'Lead', value: jobSeniority.lead, setValue: setJobSeniority },
             {
                keyName: 'expert',
@@ -84,7 +104,8 @@ function JobFiltersSection(): React.ReactElement {
       },
       {
          filterLabel: 'Location',
-         filterOptions: [
+         offerKeyName: 'workLocation',
+         options: [
             {
                keyName: 'remote',
                label: 'Remote',
@@ -105,20 +126,26 @@ function JobFiltersSection(): React.ReactElement {
             },
          ],
       },
-      { filterLabel: 'Salary (min.)', filterOptions: { value: jobSalary, setValue: setJobSalary } },
+      {
+         filterLabel: 'Salary (min.)',
+         offerKeyName: 'salaryFrom',
+         options: { value: jobSalary, setValue: setJobSalary },
+      },
    ];
    return (
       <section className={styles.container}>
          <div className={styles.header}>
             <p>Filter offers</p>
-            <span onClick={clearFilters}>Clear filters</span>
+            <span onClick={clearFilters} data-testid="clear-filters">
+               Clear filters
+            </span>
          </div>
 
          <div className={styles.filtersContainer}>
-            {jobFilters.map(({ filterLabel, filterOptions }, idx) => (
+            {jobFilters.map((filter, idx) => (
                <div key={idx}>
                   <div className={styles.separator} />
-                  <JobFilter label={filterLabel} options={filterOptions} />
+                  <JobFilter filter={filter} />
                </div>
             ))}
          </div>

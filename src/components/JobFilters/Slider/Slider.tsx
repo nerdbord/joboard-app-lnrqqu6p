@@ -1,12 +1,13 @@
 import React, { ChangeEvent } from 'react';
 import styles from './Slider.module.scss';
+import { FilterOptionSlider } from '../JobFiltersSection';
 
 interface Props {
-   value: number;
-   setValue: (value: number) => void;
+   option: FilterOptionSlider;
 }
 
-const Slider: React.FC<Props> = ({ value, setValue }) => {
+const Slider: React.FC<Props> = ({ option }) => {
+   const { value, setValue } = option;
    const maxValue = 160000;
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       setValue(parseInt(e.target.value, 10));
@@ -15,7 +16,7 @@ const Slider: React.FC<Props> = ({ value, setValue }) => {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
    };
    return (
-      <div className={styles.sliderContainer}>
+      <div className={styles.sliderContainer} data-testid="filter-slider">
          <input
             type="range"
             min={0}

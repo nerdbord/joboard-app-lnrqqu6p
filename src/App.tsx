@@ -14,7 +14,6 @@ function App(): React.ReactElement {
       <QueryClientProvider client={queryClient}>
          <Container>
             <ContainerFilters />
-
             <ContainerJobs>
                <SearchSection />
                <JobList />

@@ -14,6 +14,10 @@ $salaryColor: #9564d4;
    font-family: 'Poppins';
    cursor: pointer;
 
+      :hover {
+      background-color: #f8f8f8;
+   }
+
    @media (max-width: 768px) {
       flex-direction: column;
       row-gap: 10px;

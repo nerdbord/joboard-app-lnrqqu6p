@@ -25,7 +25,6 @@ const JobList: React.FC = () => {
    return (
       <div className={styles.jobOffersList} data-testid="jobs-container">
          {filteredJobs && filteredJobs.map((offer) => <JobCard key={offer._id} offer={offer} />)}
-
          <Modal>
             <JobOffer />
          </Modal>

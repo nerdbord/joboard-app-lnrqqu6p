@@ -26,10 +26,26 @@
    }
 
    span {
+      position: relative;
       font-size: 12px;
       font-weight: 500;
       color: #552882;
       cursor: pointer;
+      z-index: 1;
+      &:hover::after {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         display: block;
+         content: '';
+         height: 32px;
+         width: 95px;
+         border-radius: 30px;
+         color: #552882;
+         background-color: #f8f8f8;
+         z-index: -1;
+      }
    }
 }
 
@@ -42,6 +58,6 @@
 .separator {
    width: 100%;
    height: 0px;
-   border: 1px solid #dadada;
+   border-top: 1px solid #dadada;
    margin-bottom: 24px;
 }

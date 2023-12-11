@@ -97,7 +97,7 @@ $max-mobile: 768px;
    gap: 17px;
 
    @media screen and (max-width: 1120px) and (min-width: $max-mobile) {
-      >div {
+      > div {
          width: 50%;
       }
    }
@@ -174,7 +174,7 @@ $max-mobile: 768px;
    @media screen and (max-width: 1120px) {
       width: 100%;
 
-      &:last-child>p:nth-child(2) {
+      &:last-child > p:nth-child(2) {
          text-align: end;
       }
    }

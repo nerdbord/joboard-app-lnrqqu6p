@@ -74,8 +74,12 @@ $max-mobile: 768px;
    align-items: center;
    width: 252px;
    height: 34px;
-   background: var(--accent);
+   background: #9564D4;
    border-radius: 28px;
+   &:hover {
+      background-color: var(--accent);
+      color: var(--white);
+   }
 
    @media screen and (max-width: 1120px) {
       width: 90%;
@@ -86,10 +90,7 @@ $max-mobile: 768px;
       font-weight: 500;
       color: var(--white);
 
-      &:hover {
-         opacity: 0.9;
-         color: var(--white);
-      }
+
    }
 }
 
@@ -105,6 +106,7 @@ $max-mobile: 768px;
    @media screen and (max-width: $max-mobile) {
       flex-direction: column-reverse;
       width: 100%;
+      padding-bottom: 20px;
    }
 }
 

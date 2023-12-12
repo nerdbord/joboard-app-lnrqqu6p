@@ -3,7 +3,7 @@
 @import '@fontsource/poppins/700.css';
 
 :root {
-   font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+   font-family: 'Poppins', sans-serif;
    line-height: 1.5;
    font-weight: 400;
 
@@ -24,6 +24,11 @@
    --accent: #552882;
    --gray-darkest: #212121;
    --gray-dark: #545454;
+}
+
+input {
+   font-family: 'Poppins', sans-serif;
+   cursor: pointer;
 }
 
 * {
@@ -64,9 +69,7 @@ button {
    cursor: pointer;
    transition: border-color 0.25s;
 }
-button:hover {
-   border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
    outline: 4px auto -webkit-focus-ring-color;

@@ -24,6 +24,7 @@ const Slider: React.FC<Props> = ({ option }) => {
             className={styles.sliderInput}
             value={value}
             onChange={handleInputChange}
+            step="100"
          />
          <div
             className={styles.sliderLabel}

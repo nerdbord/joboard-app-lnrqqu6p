@@ -43,7 +43,7 @@ const JobOffer: React.FC = () => {
          <header className={style.headerContainer}>
             <img src={image} alt="Offer logo" className={style.logo} />
             <div className={style.titleBox}>
-               <h2 className={style.title}>{title.toUpperCase()}</h2>
+               <h2 className={style.title}>{title}</h2>
                <p className={style.technologies}>
                   {technologies.map((technology) => technology.toUpperCase()).join(' ・ ')}
                </p>

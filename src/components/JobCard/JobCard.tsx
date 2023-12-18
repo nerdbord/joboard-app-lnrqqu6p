@@ -3,6 +3,7 @@ import styles from './JobCard.module.scss';
 import { IJob } from '../../services/types';
 import { useGetOfferById } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
+import { dayInterval } from '../../services/utils';
 
 interface Props {
    offer: IJob;
@@ -25,64 +26,25 @@ function JobCard({ offer }: Props) {
       >
          <div className={styles.offerContainer}>
             <img src={offer.image} alt="logo" className={styles.logo} />
-            <div className={styles.offerData}>
-               <div className={styles.title}>{offer.title}</div>
+
+            <div className={styles.offerDataContainer}>
+               <p className={styles.title}>{offer.title}</p>
                <div className={styles.detailsContainer}>
-                  <div className={styles.colDetails}>
-                     <div className={styles.company}>{offer.companyName}</div>
-                     <Separator />
-                     <div>
-                        {offer.city}, {offer.country}
-                     </div>
-                     <Marginal />
-                  </div>
-                  <div className={styles.colDetails}>
-                     <div>{offer.workLocation}</div>
-                     <Separator />
-                     <div>{offer.seniority}</div>
-                     <Marginal />
-                  </div>
+                  <p className={styles.company}>{offer.companyName}</p>
+                  <p className={styles.location}>
+                     {offer.city}, {offer.country}
+                  </p>
+                  <p className={styles.workLocation}>{offer.workLocation}</p>
+                  <p className={styles.seniority}>{offer.seniority}</p>
+                  <p className={styles.salary}>
+                     {offer.salaryFrom} – {offer.salaryTo} {offer.currency} net
+                  </p>
                </div>
             </div>
-         </div>
-         <div className={styles.salaryDaysContainer}>
-            <div className={styles.salary}>
-               {offer.salaryFrom} - {offer.salaryTo} {offer.currency} net
-            </div>
-            <div className={styles.daysElapsedContainer}>
-               <DaysElapsed createdAt={offer.createdAt} />
-            </div>
+            <p className={styles.dayAgo}>{dayInterval(offer.createdAt)}</p>
          </div>
       </div>
    );
-}
-
-function Separator() {
-   return <div className={styles.separator}></div>;
-}
-
-function Marginal() {
-   return <div className={styles.marginal}></div>;
-}
-
-function DaysElapsed({ createdAt }) {
-   const daysElapsed = countDaysAgo(createdAt);
-   switch (daysElapsed) {
-      case 0:
-         return <div className={styles.daysElapsed}>today</div>;
-      case 1:
-         return <div className={styles.daysElapsed}>{daysElapsed} day ago</div>;
-      default:
-         return <div className={styles.daysElapsed}>{daysElapsed} days ago</div>;
-   }
-}
-
-function countDaysAgo(createdAt: string): number {
-   const createdAtDate = new Date(createdAt);
-   const today = new Date();
-   const timeDiff = today.getTime() - createdAtDate.getTime();
-   const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-   return daysDiff;
 }
 
 export default JobCard;

@@ -10,7 +10,7 @@ const Slider: React.FC<Props> = ({ option }) => {
    const { value, setValue } = option;
    const maxValue = 160000;
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setValue(parseInt(e.target.value, 10));
+         setValue(parseInt(e.target.value, 10));
    };
    const formatValue = (value: number) => {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useGetJobs } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
 import styles from './JobList.module.scss';

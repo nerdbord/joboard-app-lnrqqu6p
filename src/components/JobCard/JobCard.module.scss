@@ -61,15 +61,15 @@ $max-mobile: 768px;
    }
 
    p:not(p:last-of-type)::after {
-         content: "";
-         position: absolute;
-         display: block;
-         right: -14px;
-         top: 50%;
-         transform: translateY(-50%);
-         width: 1px;
-         height: 12px;
-         background-color: var(--gray-light);
+      content: '';
+      position: absolute;
+      display: block;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 12px;
+      background-color: var(--gray-light);
    }
 }
 

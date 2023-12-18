@@ -51,11 +51,10 @@ body {
    min-height: 100vh;
 }
 
-@media screen and (max-width: 768px) {
-   body::-webkit-scrollbar {
-      display: none;
-   }
+body::-webkit-scrollbar {
+   display: none;
 }
+
 
 h1 {
    font-size: 27px;

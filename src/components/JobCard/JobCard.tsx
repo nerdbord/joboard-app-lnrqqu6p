@@ -30,15 +30,22 @@ function JobCard({ offer }: Props) {
             <div className={styles.offerDataContainer}>
                <p className={styles.title}>{offer.title}</p>
                <div className={styles.detailsContainer}>
-                  <p className={styles.company}>{offer.companyName}</p>
-                  <p className={styles.location}>
-                     {offer.city}, {offer.country}
-                  </p>
-                  <p className={styles.workLocation}>{offer.workLocation}</p>
-                  <p className={styles.seniority}>{offer.seniority}</p>
-                  <p className={styles.salary}>
-                     {offer.salaryFrom} – {offer.salaryTo} {offer.currency} net
-                  </p>
+                  <div className={styles.detailsRow}>
+                     <p className={styles.company}>{offer.companyName}</p>
+                     <p className={styles.location}>
+                        {offer.city}, {offer.country}
+                     </p>
+                  </div>
+                  <div className={styles.detailsRow}>
+                     <p className={styles.workLocation}>{offer.workLocation}</p>
+                     <p className={styles.seniority}>{offer.seniority}</p>
+                  </div>
+                  <div className={styles.detailsRow}>
+                     <p className={styles.salary}>
+                        {offer.salaryFrom} – {offer.salaryTo} {offer.currency} net
+                     </p>
+                     <p className={styles.dayAgoMobile}>{dayInterval(offer.createdAt)}</p>
+                  </div>
                </div>
             </div>
             <p className={styles.dayAgo}>{dayInterval(offer.createdAt)}</p>

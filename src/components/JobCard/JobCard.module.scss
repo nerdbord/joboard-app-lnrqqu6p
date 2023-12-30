@@ -12,6 +12,7 @@ $max-mobile: 768px;
    @media (max-width: $max-mobile) {
       flex-direction: column;
       gap: 24px;
+      width: 100%;
    }
 
    &:hover {
@@ -60,20 +61,9 @@ $max-mobile: 768px;
       font-size: 12px;
    }
 
-   p:not(p:last-of-type)::after {
-      content: '';
-      position: absolute;
-      display: block;
-      right: -14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 1px;
-      height: 12px;
-      background-color: var(--gray-light);
+   @media (max-width: $max-mobile) {
+      flex-direction: column;
    }
-}
-
-.detailsRow {
 }
 
 .dayAgo {
@@ -81,6 +71,13 @@ $max-mobile: 768px;
    top: 24px;
    right: 24px;
    font-size: 12px;
+}
+
+.dayAgoMobile {
+   display: none;
+   @media (max-width: $max-mobile) {
+      display: block;
+   }
 }
 
 .company {
@@ -107,4 +104,23 @@ $max-mobile: 768px;
 }
 
 .salary {
+   color: var(--accent);
+}
+
+.detailsRow {
+   display: flex;
+   gap: 28px;
+   border: none;
+
+   p:not(.detailsRow:last-child p)::after {
+      content: '';
+      position: absolute;
+      display: block;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 12px;
+      background-color: var(--gray-light);
+   }
 }

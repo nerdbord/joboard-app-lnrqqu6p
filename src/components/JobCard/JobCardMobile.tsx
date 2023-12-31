@@ -1,15 +1,12 @@
 import React from 'react';
-import styles from './JobCard.module.scss';
-import { IJob } from '../../services/types';
+import { JobCardProps } from './JobCard';
 import { useGetOfferById } from '../../services/queries';
 import useJobsStore from '../../store/useJobsStore';
+import stylesMobile from './JobCardMobile.module.scss';
+import styles from './JobCard.module.scss';
 import { dayInterval } from '../../services/utils';
 
-export interface JobCardProps {
-   offer: IJob;
-}
-
-function JobCard({ offer }: JobCardProps) {
+const JobCardMobile = ({ offer }: JobCardProps) => {
    const { data } = useGetOfferById(offer._id);
    const { setOffer, setCurrentOfferId, setIsOfferWindowOper, isOfferWindowOpen } = useJobsStore();
    const handleCardOnClick = () => {
@@ -45,6 +42,6 @@ function JobCard({ offer }: JobCardProps) {
          </div>
       </div>
    );
-}
+};
 
-export default JobCard;
+export default JobCardMobile;

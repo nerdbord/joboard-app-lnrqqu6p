@@ -1,0 +1,23 @@
+.offerDataContainerMobile {
+   display: flex;
+   gap: 12px;
+   width: 100%;
+}
+
+.column {
+   display: flex;
+   flex-direction: column;
+   transform: translateY(-4px);
+}
+
+.detailsContainer {
+   display: flex;
+   font-size: 12px;
+}
+
+.dataRow {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+}

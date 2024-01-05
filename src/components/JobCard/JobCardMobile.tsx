@@ -22,23 +22,29 @@ const JobCardMobile = ({ offer }: JobCardProps) => {
          data-test-offer={JSON.stringify(offer)}
       >
          <div className={styles.offerContainer}>
-            <img src={offer.image} alt="logo" className={styles.logo} />
+            <p className={styles.title}>{offer.title}</p>
 
-            <div className={styles.offerDataContainer}>
-               <p className={styles.title}>{offer.title}</p>
-               <div className={styles.detailsContainer}>
-                  <p className={styles.company}>{offer.companyName}</p>
-                  <p className={styles.location}>
-                     {offer.city}, {offer.country}
-                  </p>
-                  <p className={styles.workLocation}>{offer.workLocation}</p>
-                  <p className={styles.seniority}>{offer.seniority}</p>
-                  <p className={styles.salary}>
-                     {offer.salaryFrom} – {offer.salaryTo} {offer.currency} net
-                  </p>
+            <div className={stylesMobile.offerDataContainerMobile}>
+               <img src={offer.image} alt="logo" className={styles.logo} />
+               <div className={stylesMobile.column}>
+                  <div className={stylesMobile.detailsContainer}>
+                     <p className={styles.company}>{offer.companyName}</p>
+                     <p className={styles.location}>
+                        {offer.city}, {offer.country}
+                     </p>
+                  </div>
+                  <div className={stylesMobile.detailsContainer}>
+                     <p className={styles.workLocation}>{offer.workLocation}</p>
+                     <p className={styles.seniority}>{offer.seniority}</p>
+                  </div>
                </div>
             </div>
-            <p className={styles.dayAgo}>{dayInterval(offer.createdAt)}</p>
+            <div className={stylesMobile.dataRow}>
+               <p className={styles.salary}>
+                  {offer.salaryFrom} – {offer.salaryTo} {offer.currency} net
+               </p>
+               <p className={styles.dayAgo}>{dayInterval(offer.createdAt)}</p>
+            </div>
          </div>
       </div>
    );

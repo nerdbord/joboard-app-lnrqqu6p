@@ -1,36 +1,36 @@
-$white: #ffffff;
-$greyDark: #545454;
-$greyDarkest: #212121;
-$borderColor: #dadada;
-$salaryColor: #9564d4;
+$max-mobile: 768px;
 
 .offer {
-   display: flex;
-   border: 1px solid $borderColor;
+   position: relative;
+   width: 797px;
+   height: 94px;
+   padding: 24px;
+   border: 1px solid var(--gray-light);
    border-radius: 5px;
-   background-color: $white;
-   column-gap: 10px;
-   font-family: 'Poppins';
+   background-color: var(--white);
    cursor: pointer;
 
-   &:hover {
-      background-color: #f8f8f8;
+   @media (max-width: $max-mobile) {
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      height: 184px;
    }
 
-   @media (max-width: 768px) {
-      flex-direction: column;
-      row-gap: 10px;
+   &:hover {
+      background-color: var(--bg-gray);
    }
 }
 
 .offerContainer {
    display: flex;
-   padding: 20px 0px 20px 20px;
-   column-gap: 10px;
-   justify-content: space-between;
+   width: 100%;
+   height: 46px;
+   gap: 26px;
 
-   @media (max-width: 768px) {
-      padding-bottom: 4px;
+   @media (max-width: $max-mobile) {
+      flex-direction: column;
+      align-items: flex-start;
    }
 }
 
@@ -38,120 +38,116 @@ $salaryColor: #9564d4;
    height: 46px;
    width: 46px;
 
-   @media (max-width: 768px) {
-      position: relative;
+   @media (max-width: $max-mobile) {
       height: 32px;
       width: 32px;
-      top: 36px;
    }
 }
 
 .title {
    font-size: 20px;
    font-weight: 600;
-   color: $greyDarkest;
-   line-height: 26px;
+   line-height: 130%;
+   letter-spacing: -0.4px;
+}
+
+.offerDataContainer {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   height: 100%;
    text-align: left;
-
-   @media (max-width: 768px) {
-      position: relative;
-      left: -42px;
-      padding-bottom: 10px;
-      max-width: 81vw;
-      overflow-x: hidden;
-   }
-}
-
-.offerData {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   flex-grow: 1;
-   white-space: nowrap;
-}
-
-.company {
-   font-weight: 500;
-}
-
-.salary {
-   display: flex;
-   color: $salaryColor;
-   font-size: 12px;
-   font-weight: 400;
-   line-height: 12px;
-   align-items: flex-end;
-   justify-content: flex-start;
-   white-space: nowrap;
-}
-
-.salaryDaysContainer {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   padding: 20px 20px 20px 5px;
-   column-gap: 10px;
-   width: 100%;
-
-   @media (max-width: 768px) {
-      padding: 10px 0 0 20px;
-   }
-}
-
-.separator {
-   border-right: 1px solid $borderColor;
-}
-
-.marginal {
-   border-right: 1px solid $borderColor;
-
-   @media (max-width: 768px) {
-      border-right: none;
-   }
-}
-
-.daysElapsedContainer {
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   white-space: nowrap;
-
-   @media (max-width: 768px) {
-      align-items: flex-end;
-   }
-}
-
-.daysElapsed {
-   font-size: 12px;
-   line-height: 12px;
-   font-weight: 400;
-   text-align: right;
-   color: $greyDark;
-}
-
-.colDetails {
-   display: flex;
-   flex-direction: row;
-   gap: inherit;
-
-   @media (max-width: 768px) {
-      justify-content: flex-start;
-   }
 }
 
 .detailsContainer {
    display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   font-size: 12px;
-   line-height: 12px;
-   font-weight: 400;
-   color: $greyDark;
-   column-gap: 14px;
-   white-space: nowrap;
+   gap: 28px;
 
-   @media (max-width: 768px) {
+   p {
+      position: relative;
+      font-size: 12px;
+   }
+
+   p:not(p:last-of-type)::after {
+      content: '';
+      position: absolute;
+      display: block;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 12px;
+      background-color: var(--gray-light);
+   }
+
+   @media (max-width: $max-mobile) {
       flex-direction: column;
-      row-gap: 8px;
+   }
+}
+
+.dayAgo {
+   position: absolute;
+   top: 24px;
+   right: 24px;
+   font-size: 12px;
+   color: #545454;
+
+   @media (max-width: $max-mobile) {
+      position: static;
+   }
+}
+
+.dayAgoMobile {
+   display: none;
+   @media (max-width: $max-mobile) {
+      display: block;
+   }
+}
+
+.company {
+   font-weight: 500;
+   color: var(--gray-darkest);
+   @media screen and (max-width: $max-mobile) {
+      padding-right: 14px;
+      border-right: 1px solid var(--gray-light);
+   }
+}
+
+.workLocation {
+   @media screen and (max-width: $max-mobile) {
+      padding-right: 14px;
+      border-right: 1px solid var(--gray-light);
+   }
+}
+
+@media screen and (max-width: $max-mobile) {
+   .location,
+   .seniority {
+      padding-left: 14px;
+   }
+}
+
+.salary {
+   color: var(--accent);
+   @media screen and (max-width: $max-mobile) {
+      font-size: 12px;
+   }
+}
+
+.detailsRow {
+   display: flex;
+   gap: 28px;
+   border: none;
+
+   p:not(.detailsRow:last-child p)::after {
+      content: '';
+      position: absolute;
+      display: block;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 12px;
+      background-color: var(--gray-light);
    }
 }

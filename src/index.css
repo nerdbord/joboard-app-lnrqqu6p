@@ -21,7 +21,7 @@
    --black: #000;
    --gray-light: #dadada;
    --bg-gray: #f8f8f8;
-   --accent: #552882;
+   --accent: #9564d4;
    --gray-darkest: #212121;
    --gray-dark: #545454;
 }
@@ -49,6 +49,10 @@ body {
    place-items: center;
    min-width: 320px;
    min-height: 100vh;
+}
+
+body::-webkit-scrollbar {
+   display: none;
 }
 
 h1 {
